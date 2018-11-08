@@ -611,7 +611,8 @@ class Adm extends CI_Controller {
 											WHERE a.id_guru = '".$a['sess_konid']."'")->result(), "id,nama");
 			$a['p_kd'] = obj_to_array($this->db->query("SELECT *
 											FROM kd a
-											INNER JOIN tr_guru_mapel b ON a.id_mapel = b.id_mapel")->result(), "id_kd,nama");
+											INNER JOIN tr_guru_mapel b ON a.id_mapel = b.id_mapel
+											WHERE b.id_guru = '".$a['sess_konid']."'")->result(), "id_kd,nama");
 		} else {
 			$a['p_guru'] = obj_to_array($this->db->query("SELECT * FROM m_guru")->result(), "id,nama");
 			$a['p_mapel'] = obj_to_array($this->db->query("SELECT 
