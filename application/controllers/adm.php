@@ -609,12 +609,18 @@ class Adm extends CI_Controller {
 											FROM tr_guru_mapel a
 											INNER JOIN m_mapel b ON a.id_mapel = b.id
 											WHERE a.id_guru = '".$a['sess_konid']."'")->result(), "id,nama");
+			$a['p_kd'] = obj_to_array($this->db->query("SELECT *
+											FROM kd a
+											INNER JOIN tr_guru_mapel b ON a.id_mapel = b.id_mapel")->result(), "id_kd,nama");
 		} else {
 			$a['p_guru'] = obj_to_array($this->db->query("SELECT * FROM m_guru")->result(), "id,nama");
 			$a['p_mapel'] = obj_to_array($this->db->query("SELECT 
 											b.id, b.nama
 											FROM tr_guru_mapel a
 											INNER JOIN m_mapel b ON a.id_mapel = b.id")->result(), "id,nama");
+			$a['p_kd'] = obj_to_array($this->db->query("SELECT *
+											FROM kd a
+											INNER JOIN tr_guru_mapel b ON a.id_mapel = b.id_mapel")->result(), "id_kd,nama");
 		}
 
 		if ($uri3 == "det") {
@@ -665,6 +671,7 @@ class Adm extends CI_Controller {
 				"bobot"=>$p['bobot'],
 				"soal"=>$p['soal'],
 				"jawaban"=>$p['jawaban'],
+				"id_kd"=>$p['id_kd'],
 			);
 
 			if ($__mode == "edit") {
