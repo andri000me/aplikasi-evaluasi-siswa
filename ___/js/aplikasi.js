@@ -574,6 +574,58 @@ function m_mapel_h(id) {
 	}
 	return false;
 }
+
+//KOMPETENSI DASAR
+function m_kd_e(id_kd) {
+	$("#m_kd").modal('show');
+	$.ajax({
+		type: "GET",
+		url: base_url+"adm/m_kd/det/"+id_kd,
+		success: function(data) {
+			$("#id_kd").val(data.id_kd);
+			$("#kd_ke").val(data.kd_ke);
+			$("#nama").val(data.nama);
+			$("#id_mapel").val(data.id_mapel);
+			$("#kd_ke").focus();
+		}
+	});
+	return false;
+}
+function m_kd_s() {
+	var f_asal	= $("#f_kd");
+	var form	= getFormData(f_asal);
+	$.ajax({		
+		type: "POST",
+		url: base_url+"adm/m_kd/simpan",
+		data: JSON.stringify(form),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8'
+	}).done(function(response) {
+		if (response.status == "ok") {
+			window.location.assign(base_url+"adm/m_kd"); 
+		} else {
+			console.log('gagal');
+		}
+	});
+	return false;
+}
+function m_kd_h(id_kd) {
+	if (confirm('Anda yakin..?')) {
+		$.ajax({
+			type: "GET",
+			url: base_url+"adm/m_kd/hapus/"+id,
+			success: function(response) {
+				if (response.status == "ok") {
+					window.location.assign(base_url+"adm/m_kd"); 
+				} else {
+					console.log('gagal');
+				}
+			}
+		});
+	}
+	return false;
+}
+
 function rubah_password() {
 	$.ajax({
 		type: "GET",
