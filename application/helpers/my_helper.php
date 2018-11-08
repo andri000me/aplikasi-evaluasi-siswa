@@ -187,6 +187,7 @@ function gen_menu() {
 	            array("icon"=>"list-alt", "url"=>"m_siswa", "text"=>"Data Siswa"),
 	            array("icon"=>"list-alt", "url"=>"m_guru", "text"=>"Data Guru/Dosen"),
 	            array("icon"=>"list-alt", "url"=>"m_mapel", "text"=>"Data Mapel"),
+	            array("icon"=>"list-alt", "url"=>"m_kd", "text"=>"Kompt. Dasar"),
 	            array("icon"=>"list-alt", "url"=>"m_soal", "text"=>"Soal"),
 				array("icon"=>"list-alt", "url"=>"m_soal_essay", "text"=>"Soal Essay"),
 	            array("icon"=>"file", "url"=>"h_ujian", "text"=>"Hasil Ujian"),
