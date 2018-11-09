@@ -1768,7 +1768,7 @@ class Adm extends CI_Controller {
 									FROM tr_guru_tes a
 									INNER JOIN m_mapel b ON a.id_mapel = b.id
 									INNER JOIN m_guru c ON a.id_guru = c.id
-									LEFT JOIN tr_ikut_ujian d ON CONCAT('".$a['sess_konid']."',a.id) = CONCAT(d.id_user,d.id_tes)
+									LEFT JOIN tr_ikut_ujian d ON CONCAT('".$a['sess_konid']."',a.id) = CONCAT(d.id_user,d.id_tes) where a.id_kelas in (select id_kelas from m_siswa where id = '".$a['sess_konid']."')
 									ORDER BY a.id ASC")->result();
 		//echo $this->db->last_query();
 		$a['p']	= "m_list_ujian_siswa";
