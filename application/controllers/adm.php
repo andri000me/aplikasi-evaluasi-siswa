@@ -550,15 +550,17 @@ class Adm extends CI_Controller {
 	    
 	        $q_datanya = $this->db->query("SELECT a.*
 											FROM kd a
-	                                        WHERE a.nama LIKE '%".$search['value']."%' ORDER BY a.id DESC LIMIT ".$start.", ".$length."")->result_array();
+	                                        WHERE a.nama LIKE '%".$search['value']."%' ORDER BY a.id_kd DESC LIMIT ".$start.", ".$length."")->result_array();
 	        $data = array();
 	        $no = ($start+1);
 
 	        foreach ($q_datanya as $d) {
 	            $data_ok = array();
 	            $data_ok[0] = $no++;
-	            $data_ok[1] = $d['nama'];
-	            $data_ok[2] = '<div class="btn-group">
+	            $data_ok[1] = $d['kd_ke'];
+	            $data_ok[2] = $d['nama'];
+	            $data_ok[3] = $d['id_mapel'];
+	            $data_ok[4] = '<div class="btn-group">
                           <a href="#" onclick="return m_kd_e('.$d['id_kd'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
                           <a href="#" onclick="return m_kd_h('.$d['id_kd'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
                          ';
@@ -579,7 +581,89 @@ class Adm extends CI_Controller {
 		}
 		$this->load->view('aaa', $a);
 	}
-	
+	///KELAS//
+		public function m_kelas() {
+		$this->cek_aktif();
+		cek_hakakses(array("admin"), $this->session->userdata('admin_level'));
+		
+		//var def session
+		$a['sess_level'] = $this->session->userdata('admin_level');
+		$a['sess_user'] = $this->session->userdata('admin_user');
+		$a['sess_konid'] = $this->session->userdata('admin_konid');
+
+		//var def uri segment
+		$uri2 = $this->uri->segment(2);
+		$uri3 = $this->uri->segment(3);
+		$uri4 = $this->uri->segment(4);
+		//var post from json
+		$p = json_decode(file_get_contents('php://input'));
+		//return as json
+		$jeson = array();
+		$a['data'] = $this->db->query("SELECT kelas.* FROM kelas")->result();
+		if ($uri3 == "det") {
+			$a = $this->db->query("SELECT * FROM kelas WHERE id_kelas = '$uri4'")->row();
+			j($a);
+			exit();
+		} else if ($uri3 == "simpan") {
+			$ket 	= "";
+			if ($p->id_kelas != 0) {
+				$this->db->query("UPDATE kelas SET nama_kelas = '".bersih($p,"nama_kelas")."'
+								WHERE id_kelas = '".bersih($p,"id_kelas")."'");
+				$ket = "edit";
+			} else {
+				$ket = "tambah";
+				$this->db->query("INSERT INTO kelas VALUES (null, '".bersih($p,"nama_kelas")."')");
+			}
+			
+			$ret_arr['status'] 	= "ok";
+			$ret_arr['caption']	= $ket." sukses";
+			j($ret_arr);
+			exit();
+		} else if ($uri3 == "hapus") {
+			$this->db->query("DELETE FROM kelas WHERE id_kelas = '".$uri4."'");
+			$ret_arr['status'] 	= "ok";
+			$ret_arr['caption']	= "hapus sukses";
+			j($ret_arr);
+			exit();
+		} else if ($uri3 == "data") {
+			$start = $this->input->post('start');
+	        $length = $this->input->post('length');
+	        $draw = $this->input->post('draw');
+	        $search = $this->input->post('search');
+
+	        $d_total_row = $this->db->query("SELECT id_kelas FROM kelas a WHERE a.nama_kelas LIKE '%".$search['value']."%'")->num_rows();
+	    
+	        $q_datanya = $this->db->query("SELECT a.*
+											FROM kelas a
+	                                        WHERE a.nama_kelas LIKE '%".$search['value']."%' ORDER BY a.id_kelas DESC LIMIT ".$start.", ".$length."")->result_array();
+	        $data = array();
+	        $no = ($start+1);
+
+	        foreach ($q_datanya as $d) {
+	            $data_ok = array();
+	            $data_ok[0] = $no++;
+	            $data_ok[1] = $d['nama_kelas'];
+	            $data_ok[2] = '<div class="btn-group">
+                          <a href="#" onclick="return m_kelas_e('.$d['id_kelas'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
+                          <a href="#" onclick="return m_kelas_h('.$d['id_kelas'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
+                         ';
+
+	            $data[] = $data_ok;
+	        }
+
+	        $json_data = array(
+	                    "draw" => $draw,
+	                    "iTotalRecords" => $d_total_row,
+	                    "iTotalDisplayRecords" => $d_total_row,
+	                    "data" => $data
+	                );
+	        j($json_data);
+	        exit;
+		} else {
+			$a['p']	= "m_kelas";
+		}
+		$this->load->view('aaa', $a);
+	}	
 	/* == GURU == */
 	public function m_soal() {
 		$this->cek_aktif();

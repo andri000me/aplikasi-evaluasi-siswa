@@ -18,6 +18,10 @@ $(document).ready(function() {
 		pagination("datatabel", base_url+"adm/m_guru/data", []);		
 	} else if (url == "m_mapel") {
 		pagination("datatabel", base_url+"adm/m_mapel/data", []);		
+	} else if (url == "m_kd") {
+		pagination("datatabel", base_url+"adm/m_kd/data", []);		
+	} else if (url == "m_kelas") {
+		pagination("datatabel", base_url+"adm/m_kelas/data", []);		
 	} else if (url == "m_soal") {
 		pagination("datatabel", base_url+"adm/m_soal/data", []);
 
@@ -613,7 +617,7 @@ function m_kd_h(id_kd) {
 	if (confirm('Anda yakin..?')) {
 		$.ajax({
 			type: "GET",
-			url: base_url+"adm/m_kd/hapus/"+id,
+			url: base_url+"adm/m_kd/hapus/"+id_kd,
 			success: function(response) {
 				if (response.status == "ok") {
 					window.location.assign(base_url+"adm/m_kd"); 
@@ -625,6 +629,56 @@ function m_kd_h(id_kd) {
 	}
 	return false;
 }
+
+//KELAS
+function m_kelas_e(id_kelas) {
+	$("#m_kelas").modal('show');
+	$.ajax({
+		type: "GET",
+		url: base_url+"adm/m_kelas/det/"+id_kelas,
+		success: function(data) {
+			$("#id_kelas").val(data.id_kelas);
+			$("#nama_kelas").val(data.nama_kelas);
+			$("#nama_kelas").focus();
+		}
+	});
+	return false;
+}
+function m_kelas_s() {
+	var f_asal	= $("#f_kelas");
+	var form	= getFormData(f_asal);
+	$.ajax({		
+		type: "POST",
+		url: base_url+"adm/m_kelas/simpan",
+		data: JSON.stringify(form),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8'
+	}).done(function(response) {
+		if (response.status == "ok") {
+			window.location.assign(base_url+"adm/m_kelas"); 
+		} else {
+			console.log('gagal');
+		}
+	});
+	return false;
+}
+function m_kelas_h(id_kelas) {
+	if (confirm('Anda yakin..?')) {
+		$.ajax({
+			type: "GET",
+			url: base_url+"adm/m_kelas/hapus/"+id_kelas,
+			success: function(response) {
+				if (response.status == "ok") {
+					window.location.assign(base_url+"adm/m_kelas"); 
+				} else {
+					console.log('gagal');
+				}
+			}
+		});
+	}
+	return false;
+}
+
 
 function rubah_password() {
 	$.ajax({

@@ -184,6 +184,7 @@ function gen_menu() {
 	} else if ($sess_level == "admin") {
 	  $menu = array(
 	            array("icon"=>"dashboard", "url"=>"", "text"=>"Dashboard"),
+	            array("icon"=>"list-alt", "url"=>"m_kelas", "text"=>"Data Kelas"),
 	            array("icon"=>"list-alt", "url"=>"m_siswa", "text"=>"Data Siswa"),
 	            array("icon"=>"list-alt", "url"=>"m_guru", "text"=>"Data Guru/Dosen"),
 	            array("icon"=>"list-alt", "url"=>"m_mapel", "text"=>"Data Mapel"),
