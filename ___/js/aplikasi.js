@@ -293,6 +293,7 @@ function m_siswa_e(id) {
 			$("#nama").val(data.nama);
 			$("#nim").val(data.nim);
 			$("#jurusan").val(data.jurusan);
+			$("#id_kelas").val(data.id_kelas);
 			$("#nama").focus();
 		}
 	});

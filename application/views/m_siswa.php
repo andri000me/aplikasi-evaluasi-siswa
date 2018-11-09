@@ -12,11 +12,12 @@
       <table class="table table-bordered" id="datatabel">
         <thead>
           <tr>
-            <th width="5%">No</th>
-            <th width="25%">Nama</th>
-            <th width="15%">NIM / Username</th>
-            <th width="20%">Kelas / Jurusan</th>
-            <th width="35%">Aksi</th>
+           <th width="5%">No</th>
+            <th width="20%">Nama</th>
+            <th width="10%">NISN</th>
+            <th width="20%">Jurusan</th>
+            <th width="10%">Kelas</th>
+            <th width="25%">Aksi</th>
           </tr>
         </thead>
 
@@ -42,6 +43,7 @@
                 <tr><td style="width: 25%">Nama</td><td style="width: 75%"><input type="text" class="form-control" name="nama" id="nama" required></td></tr>
                 <tr><td style="width: 25%">NIM</td><td style="width: 75%"><input type="text" class="form-control" name="nim" id="nim" required></td></tr>
                 <tr><td style="width: 25%">Jurusan</td><td style="width: 75%"><input type="text" class="form-control" name="jurusan" id="jurusan" required></td></tr>
+                <tr><td style="width: 25%">Kelas</td><td style="width: 75%"><input type="text" class="form-control" name="id_kelas" id="id_kelas" required></td></tr>
               </table>
       </div>
       <div class="modal-footer">

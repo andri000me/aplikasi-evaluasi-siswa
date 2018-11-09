@@ -63,11 +63,11 @@ class Adm extends CI_Controller {
 		} else if ($uri3 == "simpan") {
 			$ket 	= "";
 			if ($p->id != 0) {
-				$this->db->query("UPDATE m_siswa SET nama = '".bersih($p,"nama")."', nim = '".bersih($p,"nim")."', jurusan = '".bersih($p,"jurusan")."'	WHERE id = '".bersih($p,"id")."'");
+				$this->db->query("UPDATE m_siswa SET nama = '".bersih($p,"nama")."', nim = '".bersih($p,"nim")."', jurusan = '".bersih($p,"jurusan")."', id_kelas = '".bersih($p,"id_kelas")."'	WHERE id = '".bersih($p,"id")."'");
 				$ket = "edit";
 			} else {
 				$ket = "tambah";
-				$this->db->query("INSERT INTO m_siswa VALUES (null, '".bersih($p,"nama")."', '".bersih($p,"nim")."', '".bersih($p,"jurusan")."')");
+				$this->db->query("INSERT INTO m_siswa VALUES (null, '".bersih($p,"nama")."', '".bersih($p,"nim")."', '".bersih($p,"jurusan")."', '".bersih($p,"id_kelas")."')");
 			}
 			
 			$ret_arr['status'] 	= "ok";
@@ -170,6 +170,7 @@ class Adm extends CI_Controller {
 	            $data_ok[] = $d['nama'];
 	            $data_ok[] = $d['nim'];
 	            $data_ok[] = $d['jurusan'];
+	            $data_ok[] = $d['id_kelas'];
 
 
 
@@ -179,9 +180,9 @@ class Adm extends CI_Controller {
                          ';
 
                 if ($d['ada'] == "0") {
-                  $data_ok[4] .= '<a href="#" onclick="return m_siswa_u('.$d['id'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-user" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Aktifkan User</a>';
+                  $data_ok[5] .= '<a href="#" onclick="return m_siswa_u('.$d['id'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-user" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Aktifkan User</a>';
                 } else {
-                  $data_ok[4] .= '<a href="#" onclick="return m_siswa_ur('.$d['id'].');" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-random" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Reset Password</a>';
+                  $data_ok[5] .= '<a href="#" onclick="return m_siswa_ur('.$d['id'].');" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-random" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Reset Password</a>';
                 }
 
 	            $data[] = $data_ok;
