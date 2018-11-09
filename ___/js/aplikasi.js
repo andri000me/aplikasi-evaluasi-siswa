@@ -223,6 +223,7 @@ function m_ujian_e(id) {
 			$("#tgl_mulai").val(data.tgl_mulai);
 			$("#wkt_mulai").val(data.wkt_mulai);
 			$("#acak").val(data.jenis);
+			$("#id_kelas").val(data.id_kelas);
 			$("#nama_ujian").focus();
 			//__ambil_jumlah_soal(data.id_mapel);
 		}

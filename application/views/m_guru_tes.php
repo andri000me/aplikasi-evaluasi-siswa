@@ -15,8 +15,9 @@
             <th width="20%">Nama Tes</th>
             <th width="20%">Mata Pelajaran</th>
             <th width="10%">Jumlah Soal</th>
-            <th width="15%">Waktu</th>
-            <th width="15%">Pengacakan Soal</th>
+            <th width="10%">Waktu</th>
+            <th width="10%">Pengacakan Soal</th>
+            <th width="10%">Kelas</th>
             <th width="15%">Aksi</th>
           </tr>
         </thead>
@@ -70,6 +71,7 @@
                 </td></tr>
                 <tr><td>Waktu Ujian</td><td><?php echo form_input('waktu', '', 'class="form-control" id="waktu" placeholder="menit" required style="width: 100px; display: inline; float: left"'); ?> <div style="float: left; margin: 4px 0 0 10px"> menit</div></td></tr>
                 <tr><td>Acak Soal</td><td><?php echo form_dropdown('acak', $pola_tes, '', 'class="form-control"  id="acak" required'); ?></td></tr>
+                <tr><td style="width: 25%">Kelas</td><td style="width: 75%"><input type="text" class="form-control" name="id_kelas" id="id_kelas" required></td></tr>
               </table>
       </div>
       <div class="modal-footer">

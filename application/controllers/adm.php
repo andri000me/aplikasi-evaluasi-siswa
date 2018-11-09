@@ -1437,6 +1437,7 @@ class Adm extends CI_Controller {
 				$are['tgl_mulai'] = $pc_waktu[0];
 				$are['wkt_mulai'] = substr($pc_waktu[1],0,5);
 				$are['token'] = $a->token;
+				$are['id_kelas'] = $a->id_kelas;
 			} else {
 				$are['id'] = "";
 				$are['id_guru'] = "";
@@ -1451,6 +1452,7 @@ class Adm extends CI_Controller {
 				$are['tgl_mulai'] = "";
 				$are['wkt_mulai'] = "";
 				$are['token'] = "";
+				$are['id_kelas'] = "";
 			}
 
 			j($are);
@@ -1475,7 +1477,8 @@ class Adm extends CI_Controller {
 						waktu = '".bersih($p,"waktu")."', 
 						terlambat = '".bersih($p,"terlambat")." ".bersih($p,"terlambat2")."', 
 						tgl_mulai = '".bersih($p,"tgl_mulai")." ".bersih($p,"wkt_mulai")."', 
-						jenis = '".bersih($p,"acak")."'
+						jenis = '".bersih($p,"acak")."',
+						id_kelas = '".bersih($p,"id_kelas")."'
 						WHERE id = '".bersih($p,"id")."'");
 					$ket = "edit";
 				} else {
@@ -1493,7 +1496,8 @@ class Adm extends CI_Controller {
 						'', 
 						'".bersih($p,"tgl_mulai")." ".bersih($p,"wkt_mulai")."', 
 						'".bersih($p,"terlambat")." ".bersih($p,"terlambat2")."', 
-						'$token')");
+						'$token',
+						'".bersih($p,"id_kelas")."')");
 				}
 
 
@@ -1543,7 +1547,8 @@ class Adm extends CI_Controller {
 		            $data_ok[3] = $d['jumlah_soal'];
 		            $data_ok[4] = tjs($d['tgl_mulai'],"s")."<br>(".$d['waktu']." menit)";
 		            $data_ok[5] = $jenis_soal;
-		            $data_ok[6] = '
+		            $data_ok[6] = $d['id_kelas'];
+		            $data_ok[7] = '
 		            	<div class="btn-group">
                           <a href="#" onclick="return m_ujian_e('.$d['id'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
                           <a href="#" onclick="return m_ujian_h('.$d['id'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
