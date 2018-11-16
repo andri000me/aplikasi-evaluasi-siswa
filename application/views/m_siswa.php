@@ -43,7 +43,22 @@
                 <tr><td style="width: 25%">Nama</td><td style="width: 75%"><input type="text" class="form-control" name="nama" id="nama" required></td></tr>
                 <tr><td style="width: 25%">NIM</td><td style="width: 75%"><input type="text" class="form-control" name="nim" id="nim" required></td></tr>
                 <tr><td style="width: 25%">Jurusan</td><td style="width: 75%"><input type="text" class="form-control" name="jurusan" id="jurusan" required></td></tr>
-                <tr><td style="width: 25%">Kelas</td><td style="width: 75%"><input type="text" class="form-control" name="id_kelas" id="id_kelas" required></td></tr>
+                <tr><td style="width: 25%">Kelas</td><td style="width: 75%">
+                  <select style="width:100%;" class="form-control" id="id_kelas" required name="id_kelas">
+                    <?php
+                      
+
+                      foreach ($kelas as $key) {
+                        # code...
+                        
+                    ?>
+                    <option value=<?php echo $key['id_kelas']  ?>><?php echo $key['nama_kelas']  ?></option>
+                    
+                    <?php
+                        }   
+                    ?>
+                </select>
+              </td></tr>
               </table>
       </div>
       <div class="modal-footer">

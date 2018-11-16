@@ -158,8 +158,8 @@ class Adm extends CI_Controller {
 	        $d_total_row = $this->db->query("SELECT id FROM m_siswa a WHERE a.nama LIKE '%".$search['value']."%'")->num_rows();
 	    
 	        $q_datanya = $this->db->query("SELECT a.*,
-											(SELECT COUNT(id) FROM m_admin WHERE level = 'siswa' AND kon_id = a.id) AS ada
-											FROM m_siswa a
+											(SELECT COUNT(id) FROM m_admin WHERE level = 'siswa' AND kon_id = a.id) AS ada, b.*
+											FROM m_siswa a join kelas b on b.id_kelas = a.id_kelas
 	                                        WHERE a.nama LIKE '%".$search['value']."%' ORDER BY a.id DESC LIMIT ".$start.", ".$length."")->result_array();
 	        $data = array();
 	        $no = ($start+1);
@@ -170,7 +170,7 @@ class Adm extends CI_Controller {
 	            $data_ok[] = $d['nama'];
 	            $data_ok[] = $d['nim'];
 	            $data_ok[] = $d['jurusan'];
-	            $data_ok[] = $d['id_kelas'];
+	            $data_ok[] = $d['nama_kelas'];
 
 
 
@@ -188,11 +188,29 @@ class Adm extends CI_Controller {
 	            $data[] = $data_ok;
 	        }
 
+	        	//Tambahan Kueri Kelas
+
+	        	$kelas = $this->db->query("Select * from Kelas")->result_array();
+	        		$dataKelas = array();
+	        		foreach ($kelas as $a) {
+	        			$da=array();
+	        			$da['id']=$a['id_kelas'];
+	        			$da['nama']=$a['nama_kelas'];
+	        			$dataKelas[]=$da;
+	        		}
+
+	        	//--------s	
+	        		$a['kelasas'] = $dataKelas;
+
+
+
+
 	        $json_data = array(
 	                    "draw" => $draw,
 	                    "iTotalRecords" => $d_total_row,
 	                    "iTotalDisplayRecords" => $d_total_row,
 	                    "data" => $data
+	   
 	                );
 	        j($json_data);
 	        exit;
@@ -221,7 +239,16 @@ class Adm extends CI_Controller {
 		} else {
 			$a['p']	= "m_siswa";
 		}
+		
+					$kelas = $this->db->query("Select * from Kelas")->result_array();
+	        		
+
+	        	//--------s	
+	        		$a['kelas'] = $kelas;			
+
 		$this->load->view('aaa', $a);
+
+
 	}
 	public function m_guru() {
 		$this->cek_aktif();

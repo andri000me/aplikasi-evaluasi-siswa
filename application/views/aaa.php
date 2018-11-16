@@ -45,6 +45,8 @@
       <?php echo gen_menu(); ?>
       
       <?php echo $this->load->view($p); ?>
+     
+
    
    </div>
 
