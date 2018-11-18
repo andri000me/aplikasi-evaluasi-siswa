@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title><?php echo $this->config->item('nama_aplikasi');?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="description" content="Aplikasi Ujian Online berbasis web. Lebih Mudah dan Hemat, kayak AlfaMart">
+<meta name="description" content="Aplikasi Evaluasi Siswa untuk ujian online.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="<?php echo base_url(); ?>___/css/bootstrap.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>___/css/style.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 					<input type="password" id="password" name="password" value="" placeholder="Password" class="form-control"/>
 				</div> <!-- /password -->
 				<div class="login-actions">
-					<button class="button btn btn-warning btn-large col-lg-12 top15">Login</button>
+					<button class="button btn btn-primary btn-large col-lg-12 top15">Login</button>
 				</div> <!-- .actions -->
 			</div>
 		</div> <!-- /login-fields -->
@@ -41,7 +41,7 @@
 	<div class="col-md-4"></div>
 </div> 
 
-<div class="ctr" style="color:#090"> 
+<div class="ctr" style="color:black"> 
 	
 	<?php echo $this->config->item('nama_aplikasi')." ".$this->config->item('versi'); ?>
 </div>
