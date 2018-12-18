@@ -384,6 +384,22 @@ function aktifkan_semua_siswa() {
 	return false;
 }
 
+/////// TAMBAHAN UNTUK SHOW EVALUASI
+
+function m_evaluasi(){
+	$("#m_evaluasi").modal('show');
+	/*$.ajax({
+		type: "GET",
+		url: base_url+"adm/m_evaluasi/det/"+id,
+		success: function(data) {
+			$("#id").val(data.id);
+			$("#nip").val(data.nip);
+			$("#nama").val(data.nama);
+			$("#nama").focus();
+		}
+	});*/
+	return false;
+}
 
 //guru
 function m_guru_e(id) {

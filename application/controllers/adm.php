@@ -31,12 +31,12 @@ class Adm extends CI_Controller {
 		
 		$a['p']			= "v_main";
 		
+
 		$this->load->view('aaa', $a);
 	}
 	
 	/* == ADMIN == */
 
-	
 
 
 	public function m_siswa() {
@@ -1753,8 +1753,26 @@ class Adm extends CI_Controller {
 		}
 
 
+		// Tambah Data kelas dan mapel
+		//1 mapel
+		$mapel;
+		if($wh_1==""){
+			$mapel = $this->db->query("select * from m_mapel")->result_array();
+		}else{
+			$mapel = $this->db->query("SELECT  m_mapel.id, m_mapel.nama FROM tr_guru_mapel JOIN m_guru on tr_guru_mapel.id_guru=m_guru.id JOIN m_mapel on m_mapel.id=tr_guru_mapel.id_mapel WHERE tr_guru_mapel.id_guru = '".$a['sess_konid']."'")->result_array();
+		}
+
+		$kelas = $this->db->query("select * from kelas")->result_array();
+
+		$a["mapel"] = $mapel;
+		$a["kelas"] = $kelas;
+
+
 		$this->load->view('aaa', $a);
 	}
+
+
+
 	public function hasil_ujian_cetak() {
 		$this->cek_aktif();
 		
