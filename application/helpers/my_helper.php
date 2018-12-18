@@ -192,6 +192,7 @@ function gen_menu() {
 	            array("icon"=>"list-alt", "url"=>"m_soal", "text"=>"Soal"),
 				array("icon"=>"list-alt", "url"=>"m_soal_essay", "text"=>"Soal Essay"),
 	            array("icon"=>"file", "url"=>"h_ujian", "text"=>"Hasil Ujian"),
+	            
 	          );
 	} else {
 	  $menu = array(

@@ -1,6 +1,9 @@
 <div class="row col-md-12 ini_bodi">
   <div class="panel panel-info">
     <div class="panel-heading">Daftar Hasil Tes
+      <div class="tombol-kanan">
+        <a class="btn btn-danger btn-sm tombol-kanan" href="#" "><i class="glyphicon glyphicon-heart"></i>&nbsp;&nbsp;EVALUASI</a>
+      </div>
     </div>
     <div class="panel-body">
 

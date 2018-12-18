@@ -35,6 +35,10 @@ class Adm extends CI_Controller {
 	}
 	
 	/* == ADMIN == */
+
+	
+
+
 	public function m_siswa() {
 		$this->cek_aktif();
 		cek_hakakses(array("admin"), $this->session->userdata('admin_level'));
