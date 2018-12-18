@@ -13,7 +13,7 @@
           <tr>
             <th width="5%">No</th>
             <th width="10%">KD ke</th>
-            <th width="30%">Nama</th>
+            <th width="30%">Deskripsi</th>
             <th width="15%">Mapel</th>
             <th width="10%">Aksi</th>
           </tr>
@@ -43,13 +43,29 @@
           <form name="f_kd" id="f_kd" onsubmit="return m_kd_s();">
             <input type="hidden" name="id_kd" id="id_kd" value="0">
               <table class="table table-form">
-                <tr><td style="width: 25%">KD ke</td><td style="width: 75%"><input type="text" class="form-control" name="kd_ke" id="kd_ke" required></td></tr>
-                <tr><td style="width: 25%">Nama</td><td style="width: 75%"><input type="text" class="form-control" name="nama" id="nama" required></td></tr>
-                <tr><td style="width: 25%">Mapel</td><td style="width: 75%"><input type="text" class="form-control" name="id_mapel" id="id_mapel" required></td></tr>
+                <tr><td style="width: 25%">KD Ke</td><td style="width: 75%"><input type="text" class="form-control" name="kd_ke" id="kd_ke" required></td></tr>
+                <tr><td style="width: 25%">Deskripsi</td><td style="width: 75%"><input type="text" class="form-control" name="nama" id="nama" required></td></tr>
+                <tr><td style="width: 25%">Mapel</td><td style="width: 75%">
+                  <select style="width:100%;" class="form-control" id="id_mapel" required name="id_mapel">
+
+                    <?php
+                      
+
+                      foreach ($mapel as $key) {
+                                               
+                    ?>
+                    <option value=<?php echo $key['id']  ?>><?php echo $key['nama']  ?></option>
+                    
+                    <?php
+                        }   
+                    ?>
+                </select>
+              </td></tr>
               </table>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary"><i class="fa fa-check"></i> Simpan</button>
+        
         <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="fa fa-minus-circle"></i> Tutup</button>
       </div>
         </form>

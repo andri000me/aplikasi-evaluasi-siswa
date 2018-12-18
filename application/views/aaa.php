@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   		<link rel="shortcut icon" type="image/ico" href="<?php echo base_url(); ?>___/img/logotb.ico"/>
       <meta charset="utf-8">
       <title>Dashboard - <?php echo $this->config->item('nama_aplikasi')." ".$this->config->item('versi'); ?></title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">

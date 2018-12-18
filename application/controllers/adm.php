@@ -553,7 +553,7 @@ class Adm extends CI_Controller {
 				$ket = "edit";
 			} else {
 				$ket = "tambah";
-				$this->db->query("INSERT INTO kd VALUES (null, '".bersih($p,"kd_ke")."', 
+				$this->db->query("INSERT INTO kd VALUES ('', '".bersih($p,"kd_ke")."', 
 																'".bersih($p,"nama")."', 
 																'".bersih($p,"id_mapel")."')");
 			}
@@ -576,8 +576,8 @@ class Adm extends CI_Controller {
 
 	        $d_total_row = $this->db->query("SELECT id_kd FROM kd a WHERE a.nama LIKE '%".$search['value']."%'")->num_rows();
 	    
-	        $q_datanya = $this->db->query("SELECT a.*
-											FROM kd a
+	        $q_datanya = $this->db->query("SELECT a.*, b.nama as namaMapel
+											FROM kd a join m_mapel b on b.id=a.id_mapel 
 	                                        WHERE a.nama LIKE '%".$search['value']."%' ORDER BY a.id_kd DESC LIMIT ".$start.", ".$length."")->result_array();
 	        $data = array();
 	        $no = ($start+1);
@@ -587,7 +587,7 @@ class Adm extends CI_Controller {
 	            $data_ok[0] = $no++;
 	            $data_ok[1] = $d['kd_ke'];
 	            $data_ok[2] = $d['nama'];
-	            $data_ok[3] = $d['id_mapel'];
+	            $data_ok[3] = $d['namaMapel'];
 	            $data_ok[4] = '<div class="btn-group">
                           <a href="#" onclick="return m_kd_e('.$d['id_kd'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
                           <a href="#" onclick="return m_kd_h('.$d['id_kd'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
@@ -607,6 +607,14 @@ class Adm extends CI_Controller {
 		} else {
 			$a['p']	= "m_kd";
 		}
+
+		// Kueri untuk tambah mapel
+
+			$mapel = $this->db->query("Select * from m_mapel")->result_array();
+
+			$a['mapel']=$mapel;
+
+
 		$this->load->view('aaa', $a);
 	}
 	///KELAS//

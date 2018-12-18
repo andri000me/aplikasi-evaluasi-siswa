@@ -582,6 +582,14 @@ function m_mapel_h(id) {
 }
 
 //KOMPETENSI DASAR
+function m_kd_show(){
+	$("#m_kd").modal('show');
+			$("#id_kd").val='';
+			$("#kd_ke").val='';
+			$("#nama").val='';
+			$("#id_mapel").val='';
+}
+
 function m_kd_e(id_kd) {
 	$("#m_kd").modal('show');
 	$.ajax({
@@ -613,6 +621,7 @@ function m_kd_s() {
 			console.log('gagal');
 		}
 	});
+	
 	return false;
 }
 function m_kd_h(id_kd) {
