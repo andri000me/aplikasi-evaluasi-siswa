@@ -9,11 +9,28 @@
 
             <div class="form-group fgsoal">
               <div class="col-md-2"><label>Mapel</label></div>
-              <div class="col-md-10"><?php echo form_dropdown('id_mapel', $p_mapel, $d['id_mapel'], 'class="form-control" id="id_mapel" required'); ?></div>
+              <div class="col-md-10"><?php echo form_dropdown('id_mapel', $p_mapel, $d['id_mapel'], 'class="form-control" id="id_mapel" required onchange="return pilih_mapel();" '); ?></div>
             </div>
               <div class="form-group fgsoal">
               <div class="col-md-2"><label>KD</label></div>
-              <div class="col-md-10"><?php echo form_dropdown('id_kd', $p_kd, $d['id_mapel'], 'class="form-control" id="id_mapel" required'); ?></div>
+              <div class="col-md-10">
+                
+                <select id="id_kd" class="form-control" name="id_kd">
+                  
+
+                  <?php
+                  /*  echo '<option selected="selected" value="">-</option>';
+                    foreach ($p_kd as $key) {
+                  ?>
+                    <option value="<?php echo $key['id_kd'];?>"><?php echo $key['nama']?></option>
+                  <?php
+                    }*/
+                  ?>
+
+                </select>
+
+
+              </div>
             </div>
             <div class="form-group fgsoal">
               <div class="col-md-2"><label>Guru</label></div>

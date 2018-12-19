@@ -42,7 +42,17 @@
           <div class="row">
             <div class="col-md-6"> 
               <font>Berdasarkan Kelas & Mata Pelajaran</font>
-              <form name="f_kd" id="f_kd">
+              <?php
+                  $a="";
+                  $b="";
+                  if(isset($_GET['id_mapel'])){
+                  if(!empty($_GET['id_mapel']) and !empty($_GET['id_kelas'])){
+                    $a = $_GET['id_mapel'];
+                    $b = $_GET['id_kelas'];
+                  }}
+
+              ?>
+              <form name="mapelkelas" id="mapelkelas" type="get" action="<?php echo base_url(); ?>adm/evaluasi1" target="_blank">
               
                 <table class="table table-form">
                   <tr>
@@ -57,7 +67,7 @@
                              foreach ($mapel as $key) {
                                                
                           ?>
-                          <option value=<?php echo $key['id']  ?>><?php echo $key['nama']  ?></option>
+                          <option value=<?php echo $key['id']  ?>><?php echo $key['nama']."-"; echo $key['nama_ujian']; ?></option>
                           
                           <?php
                               }   
@@ -94,6 +104,8 @@
               </form>
             </div>
           
+            <!------ Kolom --->
+
             <div class="col-md-6">
                 Per-Mata Pelajaran
                 <form name="f_kd" id="f_kd">

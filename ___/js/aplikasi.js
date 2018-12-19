@@ -384,21 +384,41 @@ function aktifkan_semua_siswa() {
 	return false;
 }
 
+///// Tabahan PILIH MAPEL
+function pilih_mapel(){
+
+	var id = $("#id_mapel option:selected").val();
+	var select = $("#id_kd");
+	select.children('option').remove();
+	$.ajax({
+		type: "GET",
+		url: base_url+"adm/m_soal/pil/"+id,
+		success: function(data) {
+						
+			for(var i=0; i < data.length;i++){
+				select.append($("<option value="+data[i].id_kd+">"+data[i].nama+"</option>"));
+				
+			}
+				
+		}
+	});
+	
+	return false;
+
+}
+
+
 /////// TAMBAHAN UNTUK SHOW EVALUASI
 
 function m_evaluasi(){
 	$("#m_evaluasi").modal('show');
-	/*$.ajax({
-		type: "GET",
-		url: base_url+"adm/m_evaluasi/det/"+id,
-		success: function(data) {
-			$("#id").val(data.id);
-			$("#nip").val(data.nip);
-			$("#nama").val(data.nama);
-			$("#nama").focus();
-		}
-	});*/
+	
 	return false;
+}
+
+function evaluasi1(id_mapel,id_kelas){
+	window.open(base_url+"adm/evaluasi1?id_mapel="+id_mapel+"&id_kelas="+id_kelas,"_blank");
+	
 }
 
 //guru
