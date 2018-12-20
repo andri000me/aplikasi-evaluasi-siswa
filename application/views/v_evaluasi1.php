@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<link rel="shortcut icon" type="image/ico" href="<?php echo base_url(); ?>___/img/logotb.ico"/>
 <title>Evaluasi Kompetensi Dasar</title>
 <?php
 	$getData = $data_ujian[0];

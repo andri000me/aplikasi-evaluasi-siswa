@@ -45,10 +45,10 @@ class Adm extends CI_Controller {
 	/////////////////////////////
 	////////////////////////////////////////////
 
-	
+
 	public function evaluasi1(){
 		$this->cek_aktif();
-		cek_hakakses(array("admin"), $this->session->userdata('admin_level'));
+		//cek_hakakses(array("admin"), $this->session->userdata('admin_level'));
 
 		$a['sess_level'] = $this->session->userdata('admin_level');
 		$a['sess_user'] = $this->session->userdata('admin_user');
@@ -63,6 +63,19 @@ class Adm extends CI_Controller {
 		$data_ujian = $this->db->query("SELECT m_mapel.id, 	m_mapel.nama as nama_mapel, m_guru.nama as nama_guru, kelas.nama_kelas, tr_guru_tes.nama_ujian FROM tr_guru_tes JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN m_guru on m_guru.id=tr_guru_tes.id_guru JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id = '$id_ujian'")->result_array();
 		
 		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='". $data_ujian[0]['id']."'")->result_array();
+
+		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='". $data_ujian[0]['id']."'")->row();
+
+
+		$siswa_kd = $this->db-query("SELECT * FROM tr_ikut_ujian WHERE id_tes='".$id_ujian."'")-result_array();
+
+		foreach ($siswa_kd as $key) {
+			$pc_jawaban = explode(",", $key['list_jawaban']);
+
+			$jml_soal = sizeof($pc_jawaban);
+		}
+
+
 
 		$a['p'] = "v_evaluasi1";
 		$a['data_ujian'] = $data_ujian;
