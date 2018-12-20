@@ -37,7 +37,15 @@ class Adm extends CI_Controller {
 	
 	/* == ADMIN == */
 
+/////////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//////////////////////////////////////////
+	/////////////////////////////////////////////
+	///////////////////////////////////////////
+	/////////////////////////////
+	////////////////////////////////////////////
 
+	
 	public function evaluasi1(){
 		$this->cek_aktif();
 		cek_hakakses(array("admin"), $this->session->userdata('admin_level'));
@@ -1632,7 +1640,8 @@ class Adm extends CI_Controller {
 		            $data_ok[3] = $d['jumlah_soal'];
 		            $data_ok[4] = tjs($d['tgl_mulai'],"s")."<br>(".$d['waktu']." menit)";
 		            $data_ok[5] = $jenis_soal;
-		            $data_ok[6] = $d['id_kelas'];
+		            $kls = $this->db->query("SELECT nama_kelas FROM kelas WHERE id_kelas='".$d['id_kelas']."'")->row();
+		            $data_ok[6] = $kls->nama_kelas;
 		            $data_ok[7] = '
 		            	<div class="btn-group">
                           <a href="#" onclick="return m_ujian_e('.$d['id'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>

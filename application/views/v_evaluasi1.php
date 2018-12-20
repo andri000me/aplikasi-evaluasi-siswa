@@ -177,6 +177,18 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
                 <td align="center"><font size="+5">100</font></td>
             </tr>
         </table>
+        <table width="100%" border="1" cellspacing="0">
+        	<tr>
+            	<td bgcolor="#CCFF00" align="center"><strong>Jumlah Soal</strong></td>
+              <td bgcolor="#CCFF00" align="center"><strong>Jumlah Siswa</strong></td>
+              <td bgcolor="#CCFF00" align="center"><strong>Rata-Rata</strong></td>
+            </tr>
+        	<tr>
+            	<td align="center"><font size="+5">50</font></td>
+                <td align="center"><font size="+5">32</font></td>
+                <td align="center"><font size="+5">100</font></td>
+            </tr>
+        </table>
     
     </div> 
   </div>

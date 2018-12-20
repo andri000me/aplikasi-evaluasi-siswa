@@ -64,7 +64,7 @@
                 <tr>
                   <td style="width: 25%">Kelas</td>
                   <td style="width: 75%">
-                    <?php echo form_dropdown('kelas', $kelas, '', 'class="form-control"  id="id_kelas" required'); ?>
+                    <?php echo form_dropdown('id_kelas', $kelas, '', 'class="form-control"  id="id_kelas" required'); ?>
                 </tr>
 
                 <tr><td>Jumlah soal</td><td><?php echo form_input('jumlah_soal', '', 'class="form-control"  id="jumlah_soal" required'); ?></td></tr>
