@@ -40,23 +40,23 @@
       <div class="modal-body">
 
           <div class="row">
-            <div class="col-md-6"> 
-              <font>Berdasarkan Kelas & Mata Pelajaran</font>
+            <div class="col-md-12"> 
+              <font>Berdasarkan Nama Ujian</font>
               <?php
-                  $a="";
+                /*  $a="";
                   $b="";
                   if(isset($_GET['id_mapel'])){
                   if(!empty($_GET['id_mapel']) and !empty($_GET['id_kelas'])){
                     $a = $_GET['id_mapel'];
                     $b = $_GET['id_kelas'];
                   }}
-
-              ?>
-              <form name="mapelkelas" id="mapelkelas" type="get" action="<?php echo base_url(); ?>adm/evaluasi1" target="_blank">
+                */
+              ?> 
+              <form name="mapelkelas" id="mapelkelas" method="post" action="<?php echo base_url(); ?>adm/evaluasi1" target="_blank">
               
                 <table class="table table-form">
                   <tr>
-                    <td style="width: 25%">Mapel</td>
+                    <td style="width: 25%">Nama Ujian</td>
                     <td style="width: 75%">
                         <select class="form-control" name="id_mapel" id="id_mapel" required>
 
@@ -67,7 +67,7 @@
                              foreach ($mapel as $key) {
                                                
                           ?>
-                          <option value=<?php echo $key['id']  ?>><?php echo $key['nama']."-"; echo $key['nama_ujian']; ?></option>
+                          <option value=<?php echo $key['id']  ?>><?php echo $key['nama']." - "; echo $key['nama_ujian']." - "; echo $key['nama_kelas']; ?></option>
                           
                           <?php
                               }   
@@ -76,26 +76,7 @@
                         </select>
                     </td>
                   </tr>
-                  <tr>
-                    <td style="width: 25%">Kelas</td>
-                    <td style="width: 75%">
-                        <select class="form-control" name="id_kelas" id="id_kelas" required>
-
-                          <option value="-1" selected>Pilih...</option>
-                           <?php
-
-                             foreach ($kelas as $key) {
-                                               
-                          ?>
-                          <option value=<?php echo $key['id_kelas']  ?>><?php echo $key['nama_kelas']  ?></option>
-                          
-                          <?php
-                              }   
-                          ?>
-
-                        </select>
-                        </td>
-                  </tr>
+                  
                   <tr>
                     <td></td>
                     <td align="right"><button class="btn btn-primary"><i class="fa fa-print"></i> &nbsp; &nbsp;Cetak</button></td>
@@ -106,39 +87,9 @@
           
             <!------ Kolom --->
 
-            <div class="col-md-6">
-                Per-Mata Pelajaran
-                <form name="f_kd" id="f_kd">
-                <input type="hidden" name="id_kd" id="id_kd" value="0">
-                  <table class="table table-form">
-                    <tr><td style="width: 25%">Mapel</td><td style="width: 75%"> <select class="form-control" name="id_mapel" id="id_mapel" required>
-
-                          <option value="-1" selected>Pilih...</option>
-
-                          <?php
-
-                             foreach ($mapel as $key) {
-                                               
-                          ?>
-                          <option value=<?php echo $key['id']  ?>><?php echo $key['nama']  ?></option>
-                          
-                          <?php
-                              }   
-                          ?>
-
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td align="right"><button class="btn btn-primary"><i class="fa fa-print"></i> &nbsp; &nbsp;Cetak</button></td>
-                     </tr>  
-                    
-                  
-                  </table>
-                </form>
-              </div>
+           
             </div>
+            <hr width="100%">
       </div>
       <div class="modal-footer">
                 

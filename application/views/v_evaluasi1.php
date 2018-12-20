@@ -5,22 +5,16 @@
 
 <title>Evaluasi Kompetensi Dasar</title>
 <?php
-	if(!isset($_GET['id_mapel']) or !isset($_GET['id_kelas'])){
-			exit();
-	}
-	if(empty($_GET['id_mapel']) or empty($_GET['id_kelas'])){
-		exit();
-	}
-	if($_GET['id_mapel']==-1 or $_GET['id_kelas']==-1){
-		exit();
-	}
-
+	$getData = $data_ujian[0];
+	//$getkd = $data_kd[0];
+	print_r($getData);
+	print_r($data_kd);
 ?>
 <style type="text/css">
 
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background-color: #42413C;
+	background-color: #999;
 	margin: 0;
 	padding: 0;
 	color: #000;
@@ -137,81 +131,13 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
     	<tr>
         	<th style="border-bottom:2px solid black;" colspan="3"><strong>Kompetensi Dasar (KD):</strong></th>
         </tr>
+        <?php foreach($data_kd as $key){
+		 ?>
     	<tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
+        	<td valign="top" style="padding-right:5px" align="right" width="40"><?php echo $key['kd_ke'];?></td>
+            <td valign="top" style="padding-left:5px"><?php echo $key['nama'];?></td>
         </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr><tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
-        <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40">1</td>
-            <td valign="top" style="padding-left:5px">Kade satu meren</td>
-        </tr>
+        <?php } ?>
     </table>
     
   <!-- end .sidebar1 --></div>
@@ -221,19 +147,21 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
       	<tr>
         	<td valign="top" width="150" style="text-align: left">Mata Pelajaran</td>
             <td valign="top" width="10" style="text-align: left">:</td>
-            <td valign="top" width="305" style="text-align: left"><strong>Namasadasdasd asd    asdasda dasdasdasdnya</strong></td>
+            <td valign="top" width="305" style="text-align: left"><strong><?php echo $getData['nama_mapel']; ?></strong></td>
         </tr>
         <tr>
         	<td valign="top" width="150" style="text-align: left">Kelas</td>
             <td valign="top" width="10" style="text-align: left">:</td>
-            <td valign="top" width="305" style="text-align: left">XI TK-1</td>
+            <td valign="top" width="305" style="text-align: left"><?php echo $getData['nama_kelas']; ?></td>
         </tr>
         <tr>
         	<td valign="top" width="150" style="text-align: left">Guru</td>
             <td valign="top" width="10" style="text-align: left">:</td>
-            <td valign="top" width="305" style="text-align: left">Rio Dening Roso, S.Kom</td>
+            <td valign="top" width="305" style="text-align: left"><?php echo $getData['nama_guru']; ?></td>
         </tr>
-        <tr></tr>
+        <tr><td valign="top" width="150" style="text-align: left">Nama Ujian</td>
+            <td valign="top" width="10" style="text-align: left">:</td>
+            <td valign="top" width="305" style="text-align: left"><?php echo $getData['nama_ujian']; ?></td></tr>
       </table>
   	</div>
     <div>
@@ -279,7 +207,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
             
 ?>
 
-		<script>
+	<script>
         window.onload = function () {
          
         var chart = new CanvasJS.Chart("chartContainer", {

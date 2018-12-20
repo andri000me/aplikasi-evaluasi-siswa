@@ -49,22 +49,19 @@ class Adm extends CI_Controller {
 		$uri3 = $this->uri->segment(3);
 		$uri4 = $this->uri->segment(4);
 		
+		$id_ujian = $this->input->post("id_mapel");
+		
+		
+		$data_ujian = $this->db->query("SELECT m_mapel.id, 	m_mapel.nama as nama_mapel, m_guru.nama as nama_guru, kelas.nama_kelas, tr_guru_tes.nama_ujian FROM tr_guru_tes JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN m_guru on m_guru.id=tr_guru_tes.id_guru JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id = '$id_ujian'")->result_array();
+		
+		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='". $data_ujian[0]['id']."'")->result_array();
 
-		/*$p = json_decode(file_get_contents('php://input'));
-		$jeson = array();
-		$a["mapel"];
-		if($uri3 == "go"){
-			$a["mapel"] = "ROSO";
-		}
-			$ret_arr['status'] 	= "ok";
-			$ret_arr['caption']	= $ket." sukses";
-			j($ret_arr);
-			exit();
-		*/
 		$a['p'] = "v_evaluasi1";
+		$a['data_ujian'] = $data_ujian;
+		$a['data_kd'] = $data_kd;
+
 		$this->load->view('v_evaluasi1',$a);
 
-		
 		
 	}
 
@@ -1815,12 +1812,12 @@ class Adm extends CI_Controller {
 		//1 mapel
 		$mapel;
 		if($wh_1==""){
-			$mapel = $this->db->query("select tr_guru_tes.id, m_mapel.nama, tr_guru_tes.nama_ujian from m_mapel JOIN tr_guru_tes on m_mapel.id=tr_guru_tes.id_mapel")->result_array();
+			$mapel = $this->db->query("select tr_guru_tes.id, m_mapel.nama, tr_guru_tes.nama_ujian, kelas.nama_kelas from m_mapel JOIN tr_guru_tes on m_mapel.id=tr_guru_tes.id_mapel JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas")->result_array();
 		}else{
 
 			// Menampilkan Guru yang sesuai dengan login
 
-			$mapel = $this->db->query("SELECT  tr_guru_tes.id, m_mapel.nama, tr_guru_tes.nama_ujian FROM tr_guru_tes JOIN m_guru on tr_guru_tes.id_guru=m_guru.id JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel WHERE tr_guru_tes.id_guru = '".$a['sess_konid']."'")->result_array();
+			$mapel = $this->db->query("SELECT  tr_guru_tes.id, m_mapel.nama, tr_guru_tes.nama_ujian, kelas.nama_kelas FROM tr_guru_tes JOIN m_guru on tr_guru_tes.id_guru=m_guru.id JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id_guru = '".$a['sess_konid']."'")->result_array();
 		}
 
 		$kelas = $this->db->query("select * from kelas")->result_array();

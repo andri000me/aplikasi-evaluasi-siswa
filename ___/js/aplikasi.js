@@ -416,9 +416,25 @@ function m_evaluasi(){
 	return false;
 }
 
-function evaluasi1(id_mapel,id_kelas){
-	window.open(base_url+"adm/evaluasi1?id_mapel="+id_mapel+"&id_kelas="+id_kelas,"_blank");
-	
+function evaluasi1(){
+	//window.open(base_url+"adm/evaluasi1?id_mapel="+id_mapel+"&id_kelas="+id_kelas,"_blank");
+	var f_asal	= $("#mapelkelas");
+	var form	= getFormData(f_asal);
+
+	$.ajax({		
+		type: "POST",
+		url: base_url+"adm/evaluasi1",
+		data: JSON.stringify(form),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8'
+	}).done(function(response) {
+		/*if (response.status == "ok") {
+			
+		} else {
+			console.log('gagal');
+		}*/alert('berhasil'); 
+	});
+	return false;
 }
 
 //guru
