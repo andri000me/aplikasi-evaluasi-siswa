@@ -8,7 +8,13 @@
 	$getData = $data_ujian[0];
 	//$getkd = $data_kd[0];
 	print_r($getData);
+    echo "<br><br><br>";
 	print_r($data_kd);
+    echo "<br><br><br>";
+    echo count($jmlkd); echo "<br>";
+    print_r($jmlkd);
+    echo "<br><br>";
+    print_r($jmlkdsiswa);
 ?>
 <style type="text/css">
 

@@ -64,26 +64,90 @@ class Adm extends CI_Controller {
 		
 		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='". $data_ujian[0]['id']."'")->result_array();
 
-		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='". $data_ujian[0]['id']."'")->row();
-
-
-		$siswa_kd = $this->db-query("SELECT * FROM tr_ikut_ujian WHERE id_tes='".$id_ujian."'")-result_array();
-
-		foreach ($siswa_kd as $key) {
-			$pc_jawaban = explode(",", $key['list_jawaban']);
-
-			$jml_soal = sizeof($pc_jawaban);
+		$siswa_kd = $this->db->query("SELECT * FROM tr_ikut_ujian WHERE id_tes='".$id_ujian."'")->result_array();
+		
+		$jml_kd_per_soal = array();
+		foreach ($data_kd as $key) {
+			# code...
+			$jml_kd_per_soal[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0');
 		}
 
+		$jml_kd_per_siswa = array();
 
+		foreach ($siswa_kd as $key) {
+			$jml_kd_per_siswa = $jml_kd_per_soal;
+			$pc_jawaban = explode(",", $key['list_jawaban']);
+			$jml_soal = sizeof($pc_jawaban);
+
+			for ($s = 0;$s < $jml_soal;$s++){
+				$butir_soal = explode(":", $pc_jawaban[$s]);
+				$idsoal = $butir_soal[0];
+				$kdsoal = $this->db->query("SELECT id_kd, jawaban FROM m_soal WHERE id='". $idsoal ."'")->row();
+
+				for ($ax = 0 ; $ax < count($jml_kd_per_siswa) ; $ax++) {
+					# code...
+					if($jml_kd_per_siswa[$ax]['id_kd']==$kdsoal->id_kd){
+						$ambil = $jml_kd_per_siswa[$ax]['jml_kd'];
+						$j = $ambil+1;	
+						$jml_kd_per_siswa[$ax]['jml_kd'] = $j;
+						break 1;
+					}	
+				}
+			}
+
+		}
 
 		$a['p'] = "v_evaluasi1";
 		$a['data_ujian'] = $data_ujian;
 		$a['data_kd'] = $data_kd;
 
+		$a['jmlkd'] = $jml_kd_per_soal;
+
+		$a['jmlkdsiswa'] = $jml_kd_per_siswa;
+
 		$this->load->view('v_evaluasi1',$a);
 
-		
+		/*$id_tes = abs($uri4);
+
+			$get_jawaban = $this->db->query("SELECT list_jawaban FROM tr_ikut_ujian WHERE id_tes = '$uri4' AND id_user = '".$a['sess_konid']."'")->row_array();
+			$pc_jawaban = explode(",", $get_jawaban['list_jawaban']);
+
+			$jumlah_benar 	= 0;
+			$jumlah_salah 	= 0;
+			$jumlah_ragu  	= 0;
+			$nilai_bobot 	= 0;
+			$total_bobot	= 0;
+			$jumlah_soal	= sizeof($pc_jawaban);
+
+			for ($x = 0; $x < $jumlah_soal; $x++) {
+				$pc_dt = explode(":", $pc_jawaban[$x]);
+				$id_soal 	= $pc_dt[0];
+				$jawaban 	= $pc_dt[1];
+				$ragu 		= $pc_dt[2];
+
+				$cek_jwb 	= $this->db->query("SELECT bobot, jawaban FROM m_soal WHERE id = '".$id_soal."'")->row();
+				$total_bobot = $total_bobot + $cek_jwb->bobot;
+				
+				if (($cek_jwb->jawaban == $jawaban)) {
+					//jika jawaban benar 
+					$jumlah_benar++;
+					$nilai_bobot = $nilai_bobot + $cek_jwb->bobot;
+					$q_update_jwb = "UPDATE m_soal SET jml_benar = jml_benar + 1 WHERE id = '".$id_soal."'";
+				} else {
+					//jika jawaban salah
+					$jumlah_salah++;
+					$q_update_jwb = "UPDATE m_soal SET jml_salah = jml_salah + 1 WHERE id = '".$id_soal."'";
+				}
+				$this->db->query($q_update_jwb);
+			}
+
+			$nilai = ($jumlah_benar / $jumlah_soal)  * 100;
+			$nilai_bobot = ($nilai_bobot / $total_bobot)  * 100;
+
+			$this->db->query("UPDATE tr_ikut_ujian SET jml_benar = ".$jumlah_benar.", nilai = ".$nilai.", nilai_bobot = ".$nilai_bobot.", status = 'N' WHERE id_tes = '$id_tes' AND id_user = '".$a['sess_konid']."'");
+			$a['status'] = "ok";
+			j($a);
+			exit;*/		
 	}
 
 
