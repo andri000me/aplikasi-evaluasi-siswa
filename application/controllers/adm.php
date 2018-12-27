@@ -60,7 +60,7 @@ class Adm extends CI_Controller {
 		$id_ujian = $this->input->post("id_mapel");
 		
 		
-		$data_ujian = $this->db->query("SELECT m_mapel.id, 	m_mapel.nama as nama_mapel, m_guru.nama as nama_guru, kelas.nama_kelas, tr_guru_tes.nama_ujian FROM tr_guru_tes JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN m_guru on m_guru.id=tr_guru_tes.id_guru JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id = '$id_ujian'")->result_array();
+		$data_ujian = $this->db->query("SELECT m_mapel.id, 	m_mapel.nama as nama_mapel, m_guru.nama as nama_guru, kelas.nama_kelas, tr_guru_tes.nama_ujian, tr_guru_tes.jumlah_soal as jumlah_soal FROM tr_guru_tes JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN m_guru on m_guru.id=tr_guru_tes.id_guru JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id = '$id_ujian'")->result_array();
 		
 		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='". $data_ujian[0]['id']."'")->result_array();
 
@@ -139,6 +139,8 @@ class Adm extends CI_Controller {
 			$n++;
 		}
 
+		$stat1 = $this->db->query("SELECT max(nilai) as maks, min(nilai) as minim, avg(nilai) as rata, count(*) as jml_siswa FROM tr_ikut_ujian where id_tes='". $id_ujian ."'")->row();
+
 		$a['p'] = "v_evaluasi1";
 		$a['data_ujian'] = $data_ujian;
 		$a['data_kd'] = $data_kd;
@@ -148,6 +150,8 @@ class Adm extends CI_Controller {
 		//$a['jmlkdsiswa'] = $jml_kd_per_siswa;
 
 		$a['tampung_kd_siswa'] = $tampung_kd_siswa;
+
+		$a['stat1'] = $stat1;
 
 		$this->load->view('v_evaluasi1',$a);
 

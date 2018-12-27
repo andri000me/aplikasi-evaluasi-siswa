@@ -7,21 +7,21 @@
 <?php
 	$getData = $data_ujian[0];
 	//$getkd = $data_kd[0];
-	print_r($getData);
+	/*print_r($getData);
     echo "<br><br><br>";
-	print_r($data_kd);
+	print_r($data_kd);*/
     foreach ($jmlkd as $key) {
         # code...
         $dataPoints[] = array('label' => 'KD'.$key['id_kd'] , 'y'=>round($key['jml_kd'],0));
     }
     
-    echo "<br><br><br>";
+/*echo "<br><br><br>";
     echo count($jmlkd); echo "<br><pre>";
     print_r($jmlkd);
-   // echo "<br><br><pre>";
-    //print_r($jmlkdsiswa);echo "</pre>";
+   echo "<br><br><pre>";
+    print_r($jmlkdsiswa);echo "</pre>";
     echo "</pre><br><br><pre>";
-    print_r($tampung_kd_siswa);echo "</pre>";
+    print_r($tampung_kd_siswa);echo "</pre>";*/
 ?>
 <style type="text/css">
 
@@ -185,21 +185,20 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
               <td bgcolor="#CCFF00" align="center"><strong>Rata-Rata</strong></td>
             </tr>
         	<tr>
-            	<td align="center"><font size="+5">100</font></td>
-                <td align="center"><font size="+5">100</font></td>
-                <td align="center"><font size="+5">100</font></td>
+            	<td align="center"><font size="+5"><?php echo number_format($stat1->maks, 1); ?></font></td>
+                <td align="center"><font size="+5"><?php echo number_format($stat1->minim, 1); ?></font></td>
+                <td align="center"><font size="+5"><?php echo number_format($stat1->rata,1); ?></font></td>
             </tr>
-        </table>
-        <table width="100%" border="1" cellspacing="0">
+        
         	<tr>
             	<td bgcolor="#CCFF00" align="center"><strong>Jumlah Soal</strong></td>
               <td bgcolor="#CCFF00" align="center"><strong>Jumlah Siswa</strong></td>
-              <td bgcolor="#CCFF00" align="center"><strong>Rata-Rata</strong></td>
+              <td bgcolor="#CCFF00" align="center"><strong>?</strong></td>
             </tr>
         	<tr>
-            	<td align="center"><font size="+5">50</font></td>
-                <td align="center"><font size="+5">32</font></td>
-                <td align="center"><font size="+5">100</font></td>
+            	<td align="center"><font size="+5"><?php echo $getData['jumlah_soal']; ?></font></td>
+                <td align="center"><font size="+5"><?php echo $stat1->jml_siswa; ?></font></td>
+                <td align="center"><font size="+5">blm</font></td>
             </tr>
         </table>
     
@@ -230,7 +229,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 			
         );*/
 
-        echo "<pre>";print_r($dataPoints);echo "</pre>";
+        //echo "<pre>";print_r($dataPoints);echo "</pre>";
             
 ?>
 
@@ -245,6 +244,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
             },
             axisY: {
                 suffix: " siswa",
+                interval: 5,
                 
             },
 			 axisX:{
