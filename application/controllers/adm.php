@@ -72,29 +72,71 @@ class Adm extends CI_Controller {
 			$jml_kd_per_soal[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0');
 		}
 
+		// Ini variable hanya untuk percobaan saja yaa...
 		$jml_kd_per_siswa = array();
+		foreach ($data_kd as $key) {
+			# code...
+			$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','point_kd' => '0');
+		}
+
+		$tampung_kd_siswa = array();
 
 		foreach ($siswa_kd as $key) {
-			$jml_kd_per_siswa = $jml_kd_per_soal;
 			$pc_jawaban = explode(",", $key['list_jawaban']);
 			$jml_soal = sizeof($pc_jawaban);
 
 			for ($s = 0;$s < $jml_soal;$s++){
 				$butir_soal = explode(":", $pc_jawaban[$s]);
 				$idsoal = $butir_soal[0];
+				$jawaban= $butir_soal[1];
 				$kdsoal = $this->db->query("SELECT id_kd, jawaban FROM m_soal WHERE id='". $idsoal ."'")->row();
 
-				for ($ax = 0 ; $ax < count($jml_kd_per_siswa) ; $ax++) {
-					# code...
-					if($jml_kd_per_siswa[$ax]['id_kd']==$kdsoal->id_kd){
-						$ambil = $jml_kd_per_siswa[$ax]['jml_kd'];
-						$j = $ambil+1;	
-						$jml_kd_per_siswa[$ax]['jml_kd'] = $j;
-						break 1;
-					}	
-				}
+				// CEK JAWABAN: KLO bener masukan kdalam tampung KD
+
+				//if($kdsoal->jawaban == $jawaban ){
+					// Kemudian cari dalam array sesuai dengan kode KD
+					// Dan simpan ddalam Array jumlahnya
+					for ($ax = 0 ; $ax < count($jml_kd_per_siswa) ; $ax++) {
+						# code...
+						if($jml_kd_per_siswa[$ax]['id_kd']==$kdsoal->id_kd){
+							$ambil = $jml_kd_per_siswa[$ax]['jml_kd'];
+							$j = $ambil+1;	
+							$jml_kd_per_siswa[$ax]['jml_kd'] = $j;
+							
+							// CEK JAWABAN: KLO bener masukan kdalam tampung KD
+							if($kdsoal->jawaban == $jawaban ){
+								$ambil_benar = $jml_kd_per_siswa[$ax]['jml_kd_benar'];
+								$i = $ambil_benar+1;	
+								$jml_kd_per_siswa[$ax]['jml_kd_benar'] = $i;
+								$jml_kd_per_siswa[$ax]['point_kd'] = $jml_kd_per_siswa[$ax]['jml_kd_benar'] / $jml_kd_per_siswa[$ax]['jml_kd'];
+							}
+
+							break 1;
+						}	
+					}
+				//}
+				
 			}
 
+			$tampung_kd_siswa[] = $jml_kd_per_siswa;
+
+		}
+
+		$n=0;
+		foreach ($tampung_kd_siswa as $kd) {
+			# code...
+			for($i = 0 ; $i < count($kd) ; $i++){
+				for($aa = 0 ; $aa < count($jml_kd_per_soal);$aa++)
+				{
+					if($kd[$i]['id_kd'] == $jml_kd_per_soal[$aa]['id_kd']){
+						$jml_kd_per_soal[$aa]['jml_kd'] = $kd[$i]['point_kd'];
+						break 1;
+					}
+				}
+				
+			}
+
+			$n++;
 		}
 
 		$a['p'] = "v_evaluasi1";
@@ -103,7 +145,9 @@ class Adm extends CI_Controller {
 
 		$a['jmlkd'] = $jml_kd_per_soal;
 
-		$a['jmlkdsiswa'] = $jml_kd_per_siswa;
+		//$a['jmlkdsiswa'] = $jml_kd_per_siswa;
+
+		$a['tampung_kd_siswa'] = $tampung_kd_siswa;
 
 		$this->load->view('v_evaluasi1',$a);
 

@@ -10,11 +10,18 @@
 	print_r($getData);
     echo "<br><br><br>";
 	print_r($data_kd);
+    foreach ($jmlkd as $key) {
+        # code...
+        $dataPoints[] = array('label' => 'KD'.$key['id_kd'] , 'y'=>round($key['jml_kd'],0));
+    }
+    
     echo "<br><br><br>";
-    echo count($jmlkd); echo "<br>";
+    echo count($jmlkd); echo "<br><pre>";
     print_r($jmlkd);
-    echo "<br><br>";
-    print_r($jmlkdsiswa);
+   // echo "<br><br><pre>";
+    //print_r($jmlkdsiswa);echo "</pre>";
+    echo "</pre><br><br><pre>";
+    print_r($tampung_kd_siswa);echo "</pre>";
 ?>
 <style type="text/css">
 
@@ -202,7 +209,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
     <h3>Grafik Pencapaian KD</h3>
 			<?php
          
-        	$dataPoints = array(
+        	/*$dataPoints = array(
             array("label"=> "KD1", "y"=> 60.0),
             array("label"=> "KD2", "y"=> 70),
 			array("label"=> "KD2", "y"=> 70),
@@ -221,7 +228,9 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 			array("label"=> "OpenCart", "y"=> 0.8),
 			array("label"=> "OpenCart", "y"=> 0.8)
 			
-        );
+        );*/
+
+        echo "<pre>";print_r($dataPoints);echo "</pre>";
             
 ?>
 
