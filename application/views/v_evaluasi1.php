@@ -114,6 +114,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	background-color: #666;
 	position: relative;/* this gives IE6 hasLayout to properly clear */
 	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+    color: white;
 }
 
 /* ~~ Miscellaneous float/clear classes ~~ */
@@ -239,9 +240,9 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             theme: "light1",
-            title: {
+            /*title: {
                 text: "Grafik Pencapaian Kompetensi"
-            },
+            },*/
             axisY: {
                 suffix: " siswa",
                 interval: 5,
@@ -269,7 +270,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
                                   
     <!-- end .content --></div>
   <div class="footer">
-    <p>SMK Taruna Bangsa @ 2018</p>
+    SMK Taruna Bangsa @ 2018
   <!-- end .footer --></div>
   <!-- end .container --></div>
 </body>

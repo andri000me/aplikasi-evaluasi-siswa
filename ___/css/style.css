@@ -98,9 +98,9 @@ a {text-decoration: none}
 
 
 /* NAVBAR */
-nav.navbar-findcond { background: #CF9; border-color: #ccc; box-shadow: 0 0 5px 0 #0C0; }
-nav.navbar-findcond a { color: #f14444; }
-nav.navbar-findcond ul.navbar-nav a { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: #CF9 ; }
+nav.navbar-findcond { background: #b3b3b3;  border: 5px black; box-shadow: 0 0 5px 0 black; }
+nav.navbar-findcond a { color: #ffffff; }
+nav.navbar-findcond ul.navbar-nav a { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: black ; }
 nav.navbar-findcond ul.navbar-nav a:hover,
 nav.navbar-findcond ul.navbar-nav a:visited,
 nav.navbar-findcond ul.navbar-nav a:focus,
