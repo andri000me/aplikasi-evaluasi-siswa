@@ -2304,7 +2304,7 @@ th {
   padding: 5px;
 }
 .table-bordered {
-  border: 1px solid #ddd;
+  border: 1px solid black;  /* Diubah uga yah*/
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -2312,7 +2312,7 @@ th {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #ddd;
+  border: 1px solid black;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
@@ -5784,12 +5784,15 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: ;
 }
 .panel-info {
-  border-color: #0F0;
+  border-color: black; /* ini juga diubah jadi black */
 }
 .panel-info > .panel-heading {
-  color: #31708f;
+  /* color: #31708f;
   background-color: #CF9;
-  border-color: #bce8f1;
+  border-color: #bce8f1;*/
+  color: white;
+  background-color: #6f706f;
+  border-bottom: 4px black solid; /* diubaaahh juga buat panel dalemnya*/
 }
 .panel-info > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #bce8f1;
