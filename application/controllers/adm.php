@@ -45,10 +45,26 @@ class Adm extends CI_Controller {
 	/////////////////////////////
 	////////////////////////////////////////////
 
+	public function evaluasi2(){
+		$this->cek_aktif();
+		cek_hakakses(array("admin","guru"), $this->session->userdata('admin_level'));
+		$a['sess_level'] = $this->session->userdata('admin_level');
+		$a['sess_user'] = $this->session->userdata('admin_user');
+		$a['sess_konid'] = $this->session->userdata('admin_konid');
+		$uri2 = $this->uri->segment(2);
+		$uri3 = $this->uri->segment(3);
+		$uri4 = $this->uri->segment(4);
+		
+		$id_siswa = $this->input->post("id_siswa");
+
+		$data_ujian = $this->db->query("SELECT m_mapel.id, 	m_mapel.nama as nama_mapel, m_guru.nama as nama_guru, kelas.nama_kelas, tr_guru_tes.nama_ujian, tr_guru_tes.jumlah_soal as jumlah_soal FROM tr_guru_tes JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN m_guru on m_guru.id=tr_guru_tes.id_guru JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id = '$id_ujian'")->result_array();
+
+		$this->load->view('v_evaluasi2',$a);
+	}
 
 	public function evaluasi1(){
 		$this->cek_aktif();
-		//cek_hakakses(array("admin"), $this->session->userdata('admin_level'));
+		cek_hakakses(array("admin","guru"), $this->session->userdata('admin_level'));
 
 		$a['sess_level'] = $this->session->userdata('admin_level');
 		$a['sess_user'] = $this->session->userdata('admin_user');
@@ -59,7 +75,7 @@ class Adm extends CI_Controller {
 		
 		$id_ujian = $this->input->post("id_mapel");
 		
-		
+
 		$data_ujian = $this->db->query("SELECT m_mapel.id, 	m_mapel.nama as nama_mapel, m_guru.nama as nama_guru, kelas.nama_kelas, tr_guru_tes.nama_ujian, tr_guru_tes.jumlah_soal as jumlah_soal FROM tr_guru_tes JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN m_guru on m_guru.id=tr_guru_tes.id_guru JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id = '$id_ujian'")->result_array();
 		
 		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='". $data_ujian[0]['id']."'")->result_array();
@@ -1939,9 +1955,17 @@ class Adm extends CI_Controller {
 	                );
 	        j($json_data);
 	        exit;
-		} else {
+	    } else {
 			$a['p']	= "m_guru_tes_hasil";
 		}
+
+		if($uri3=="pilih_ujian"){
+	    	//$id_siswa = $this->db->query("SELECT id_user FROM tr_ikut_ujian WHERE id='".$uri4."'")->row();
+	    	$id_siswanya= $this->db->query("SELECT m_siswa.id, m_siswa.nama FROM tr_ikut_ujian JOIN m_siswa on tr_ikut_ujian.id_user=m_siswa.id WHERE tr_ikut_ujian.id_tes = '$uri4'")->result_array();
+
+	    	J($id_siswanya);
+	    	exit;
+		} 
 
 
 		// Tambah Data kelas dan mapel

@@ -42,16 +42,7 @@
           <div class="row">
             <div class="col-md-12"> 
               <font>Berdasarkan Nama Ujian</font>
-              <?php
-                /*  $a="";
-                  $b="";
-                  if(isset($_GET['id_mapel'])){
-                  if(!empty($_GET['id_mapel']) and !empty($_GET['id_kelas'])){
-                    $a = $_GET['id_mapel'];
-                    $b = $_GET['id_kelas'];
-                  }}
-                */
-              ?> 
+              
               <form name="mapelkelas" id="mapelkelas" method="post" action="<?php echo base_url(); ?>adm/evaluasi1" target="_blank">
               
                 <table class="table table-form">
@@ -89,22 +80,15 @@
             <div class="col-md-12"> 
               <font>Berdasarkan Siswa / per-siswa</font>
               <?php
-                /*  $a="";
-                  $b="";
-                  if(isset($_GET['id_mapel'])){
-                  if(!empty($_GET['id_mapel']) and !empty($_GET['id_kelas'])){
-                    $a = $_GET['id_mapel'];
-                    $b = $_GET['id_kelas'];
-                  }}
-                */
+               
               ?> 
-              <form name="mapelkelas" id="mapelkelas" method="post" action="<?php echo base_url(); ?>adm/evaluasi1" target="_blank">
+              <form name="persiswa" id="persiswa" method="post" action="<?php echo base_url(); ?>adm/evaluasi2" target="_blank">
               
                 <table class="table table-form">
                   <tr>
                     <td style="width: 25%">Nama Ujian</td>
                     <td style="width: 75%">
-                        <select class="form-control" name="id_mapel" id="id_mapel" required>
+                        <select class="form-control" name="id_mapel2" id="id_mapel2" required onchange="return pilih_namaujian();">
 
                           <option value="-1" selected>Pilih...</option>
 
@@ -122,7 +106,25 @@
                         </select>
                     </td>
                   </tr>
-                  
+                  <tr>
+                     <td style="width: 25%">Nama Siswa</td>
+                     <td style="width: 75%">
+                        <select class="form-control" name="id_siswa" id="id_siswa" required>
+
+                          <?php
+
+                             foreach ($nama_siswa_ujian as $key) {
+                                               
+                          ?>
+                          <option value=<?php echo $key['id']  ?>><?php echo $key['nama'];?></option>
+                          
+                          <?php
+                              }   
+                          ?>
+
+                        </select>
+                    </td>
+                  </tr>
                   <tr>
                     <td></td>
                     <td align="right"><button class="btn btn-primary"><i class="fa fa-print"></i> &nbsp; &nbsp;Cetak</button></td>

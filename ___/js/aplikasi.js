@@ -407,6 +407,24 @@ function pilih_mapel(){
 
 }
 
+function pilih_namaujian(){
+	var id = $("#id_mapel2 option:selected").val();
+	var select = $("#id_siswa");
+	select.children('option').remove();
+	$.ajax({
+		type: "GET",
+		url: base_url+"adm/h_ujian/pilih_ujian/"+id,
+		success: function(data) {
+						
+			for(var i=0; i < data.length;i++){
+				select.append($("<option value="+data[i].id_kd+">"+data[i].nama+"</option>"));
+				
+			}
+				
+		}
+	});
+	return false;
+}
 
 /////// TAMBAHAN UNTUK SHOW EVALUASI
 
@@ -435,6 +453,10 @@ function evaluasi1(){
 		}*/alert('berhasil'); 
 	});
 	return false;
+}
+
+function evaluasi2(){
+
 }
 
 //guru
