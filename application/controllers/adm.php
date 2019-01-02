@@ -1062,10 +1062,12 @@ class Adm extends CI_Controller {
 
 			$a['p_mapel'] = obj_to_array($this->db->query("SELECT b.id, b.nama FROM tr_guru_mapel a INNER JOIN m_mapel b ON a.id_mapel = b.id $id_guru")->result(),"id,nama");
 
+			// Nambahin KD untuk selction for EDIT
 			if ($uri4 == 0) {
 				$a['d'] = array("mode"=>"add","id"=>"0","id_guru"=>$id_guru,"id_mapel"=>"","bobot"=>"1","file"=>"","soal"=>"","opsi_a"=>"#####","opsi_b"=>"#####","opsi_c"=>"#####","opsi_d"=>"#####","opsi_e"=>"#####","jawaban"=>"","tgl_input"=>"");
 			} else {
 				$a['d'] = $this->db->query("SELECT m_soal.*, 'edit' AS mode FROM m_soal WHERE id = '$uri4'")->row_array();
+				$a['kde'] = obj_to_array($this->db->query("SELECT id_kd, nama FROM kd where id_mapel='".$a['d']['id_mapel']."'")->result(),"id_kd,nama");
 
 			}
 

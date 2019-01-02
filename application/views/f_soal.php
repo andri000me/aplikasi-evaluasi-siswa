@@ -14,21 +14,12 @@
               <div class="form-group fgsoal">
               <div class="col-md-2"><label>KD</label></div>
               <div class="col-md-10">
-                
-                <select id="id_kd" class="form-control" name="id_kd">
-                  
-
-                  <?php
-                  /*  echo '<option selected="selected" value="">-</option>';
-                    foreach ($p_kd as $key) {
-                  ?>
-                    <option value="<?php echo $key['id_kd'];?>"><?php echo $key['nama']?></option>
-                  <?php
-                    }*/
-                  ?>
-
-                </select>
-
+                <?php
+                  if (isset($kde)){
+                    echo form_dropdown('id_kd', $kde, $d['id_kd'], 'class="form-control"  id="id_kd" required" ');
+                  }else{?>
+                     <select id="id_kd" class="form-control" name="id_kd"></select>  
+                  <?php } ?>           
 
               </div>
             </div>
