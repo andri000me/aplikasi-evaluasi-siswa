@@ -207,7 +207,6 @@ class Adm extends CI_Controller {
 							}
 
 
-							break 1;
 						}	
 					}
 				//}
