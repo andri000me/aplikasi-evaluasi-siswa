@@ -15,6 +15,8 @@
         $dataPoints[] = array('label' => 'KD'.$key['id_kd'] , 'y'=>round($key['jml_kd'],0));
     }
     
+	print_r($arr);
+	
 /*echo "<br><br><br>";
     echo count($jmlkd); echo "<br><pre>";
     print_r($jmlkd);
@@ -194,12 +196,12 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
         	<tr>
             	<td bgcolor="#CCFF00" align="center"><strong>Jumlah Soal</strong></td>
               <td bgcolor="#CCFF00" align="center"><strong>Jumlah Siswa</strong></td>
-              <td bgcolor="#CCFF00" align="center"><strong>?</strong></td>
+              <td bgcolor="#CCFF00" align="center"><strong>Ketercapaian</strong></td>
             </tr>
         	<tr>
             	<td align="center"><font size="+5"><?php echo $getData['jumlah_soal']; ?></font></td>
                 <td align="center"><font size="+5"><?php echo $stat1->jml_siswa; ?></font></td>
-                <td align="center"><font size="+5">blm</font></td>
+                <td align="center"><font size="+5"><?php echo ($presen*100)."%"; ?></font></td>
             </tr>
         </table>
     

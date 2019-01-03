@@ -206,6 +206,7 @@ class Adm extends CI_Controller {
 								$jml_kd_per_siswa[$ax]['point_kd'] = $jml_kd_per_siswa[$ax]['jml_kd_benar'] / $jml_kd_per_siswa[$ax]['jml_kd'];
 							}
 
+
 							break 1;
 						}	
 					}
@@ -218,6 +219,7 @@ class Adm extends CI_Controller {
 		}
 
 		$n=0;
+		$jmlKdPoint=0;
 		foreach ($tampung_kd_siswa as $kd) {
 			# code...
 			for($i = 0 ; $i < count($kd) ; $i++){
@@ -225,6 +227,7 @@ class Adm extends CI_Controller {
 				{
 					if($kd[$i]['id_kd'] == $jml_kd_per_soal[$aa]['id_kd']){
 						$jml_kd_per_soal[$aa]['jml_kd'] = $kd[$i]['point_kd'];
+						$jmlKdPoint=+$kd[$i]['point_kd'];
 						break 1;
 					}
 				}
@@ -233,6 +236,14 @@ class Adm extends CI_Controller {
 
 			$n++;
 		}
+
+		$jmlSiswa= count($tampung_kd_siswa);
+		$jmlKdSebenarnya = count($jml_kd_per_soal);
+
+		$presen = ($jmlKdPoint)/($jmlSiswa*$jmlKdSebenarnya);
+		$arr = array('jmlsiswa' => $jmlSiswa, 'jmlsebenarnya'=> $jmlKdSebenarnya, 'kd'=>$jmlKdPoint);
+
+		$a['arr']=$arr;
 
 		$stat1 = $this->db->query("SELECT max(nilai) as maks, min(nilai) as minim, avg(nilai) as rata, count(*) as jml_siswa FROM tr_ikut_ujian where id_tes='". $id_ujian ."'")->row();
 
@@ -247,6 +258,8 @@ class Adm extends CI_Controller {
 		$a['tampung_kd_siswa'] = $tampung_kd_siswa;
 
 		$a['stat1'] = $stat1;
+
+		$a['presen'] = $presen;
 
 		$this->load->view('v_evaluasi1',$a);
 
