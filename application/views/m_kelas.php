@@ -7,7 +7,6 @@
     </div>
     <div class="panel-body">
 
-
       <table class="table table-bordered" id="datatabel">
         <thead>
           <tr>
@@ -40,6 +39,7 @@
       </div>
       <div class="modal-body">
           <form name="f_kelas" id="f_kelas" onsubmit="return m_kelas_s();">
+              <input type="text" name="id_obj" id="id_obj" value="0">
               <table class="table table-form">
                 <tr>
                   <td style="width: 25%">Kode Kelas</td>

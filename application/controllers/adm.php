@@ -907,6 +907,9 @@ class Adm extends CI_Controller {
 		$uri4 = $this->uri->segment(4);
 		//var post from json
 		$p = json_decode(file_get_contents('php://input'));
+		$id_kelasa = $this->input->post("id_kelas");
+		$nama_kelasa = $this->input->post("nama_kelas");
+		$a['asd']= 0;
 		//return as json
 		$jeson = array();
 		$a['data'] = $this->db->query("SELECT kelas.* FROM kelas")->result();
@@ -915,10 +918,12 @@ class Adm extends CI_Controller {
 			j($a);
 			exit();
 		} else if ($uri3 == "simpan") {
+			
 			$ket 	= "";
-			if ($p->id_kelas != 0) {
-				$this->db->query("UPDATE kelas SET nama_kelas = '".bersih($p,"nama_kelas")."'
-								WHERE id_kelas = '".bersih($p,"id_kelas")."'");
+
+			//if ($p->id_kelas != 0) {
+			if($p->id_obj=="e"){
+				$this->db->query("UPDATE kelas SET nama_kelas = '".bersih($p,"nama_kelas")."' WHERE id_kelas = '".bersih($p,"id_kelas")."'");
 				$ket = "edit";
 			} else {
 				$ket = "tambah";
@@ -973,6 +978,7 @@ class Adm extends CI_Controller {
 		} else {
 			$a['p']	= "m_kelas";
 		}
+
 		$this->load->view('aaa', $a);
 	}	
 	/* == GURU == */

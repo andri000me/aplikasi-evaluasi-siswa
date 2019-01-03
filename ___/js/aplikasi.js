@@ -722,6 +722,7 @@ function m_kelas_e(id_kelas) {
 		type: "GET",
 		url: base_url+"adm/m_kelas/det/"+id_kelas,
 		success: function(data) {
+			$("#id_obj").val("e");
 			$("#id_kelas").val(data.id_kelas);
 			$("#nama_kelas").val(data.nama_kelas);
 			$("#nama_kelas").focus();
@@ -732,6 +733,7 @@ function m_kelas_e(id_kelas) {
 function m_kelas_s() {
 	var f_asal	= $("#f_kelas");
 	var form	= getFormData(f_asal);
+	
 	$.ajax({		
 		type: "POST",
 		url: base_url+"adm/m_kelas/simpan",
@@ -741,10 +743,12 @@ function m_kelas_s() {
 	}).done(function(response) {
 		if (response.status == "ok") {
 			window.location.assign(base_url+"adm/m_kelas"); 
+			
 		} else {
 			console.log('gagal');
 		}
 	});
+	
 	return false;
 }
 function m_kelas_h(id_kelas) {
