@@ -226,7 +226,7 @@ class Adm extends CI_Controller {
 				for($aa = 0 ; $aa < count($jml_kd_per_soal);$aa++)
 				{
 					if($kd[$i]['id_kd'] == $jml_kd_per_soal[$aa]['id_kd']){
-						$jml_kd_per_soal[$i]['jml_kd'] = $kd[$i]['point_kd'];
+						$jml_kd_per_soal[$aa]['jml_kd'] = $kd[$i]['point_kd'];
 						$jmlKdPoint=$jmlKdPoint+$kd[$i]['point_kd'];
 						break 1;
 					}
