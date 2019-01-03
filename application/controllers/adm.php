@@ -254,7 +254,7 @@ class Adm extends CI_Controller {
 
 		$a['jmlkd'] = $jml_kd_per_soal;
 
-		//$a['jmlkdsiswa'] = $jml_kd_per_siswa;
+		$a['jmlkdsiswa'] = $jml_kd_per_siswa;
 
 		$a['tampung_kd_siswa'] = $tampung_kd_siswa;
 

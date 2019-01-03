@@ -17,13 +17,13 @@
     
 	
 	
-/*echo "<br><br><br>";
+echo "<br><br><br>";
     echo count($jmlkd); echo "<br><pre>";
     print_r($jmlkd);
    echo "<br><br><pre>";
     print_r($jmlkdsiswa);echo "</pre>";
     echo "</pre><br><br><pre>";
-    print_r($tampung_kd_siswa);echo "</pre>";*/
+    print_r($tampung_kd_siswa);echo "</pre>";
 	//print_r($arr);
 	print_r($dataPoints);
 ?>
