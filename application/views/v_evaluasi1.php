@@ -24,6 +24,7 @@
     print_r($jmlkdsiswa);echo "</pre>";
     echo "</pre><br><br><pre>";
     print_r($tampung_kd_siswa);echo "</pre>";*/
+	//print_r($arr);
 ?>
 <style type="text/css">
 
