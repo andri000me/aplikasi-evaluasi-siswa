@@ -12,7 +12,7 @@
 	print_r($data_kd);*/
     foreach ($jmlkd as $key) {
         # code...
-        $dataPoints[] = array('label' => 'KD'.$key['id_kd'] , 'y'=>round($key['jml_kd'],0));
+        $dataPoints[] = array('label' => 'KD'.$key['kd_ke'] , 'y'=>$key['jml_kd']);
     }
     
 	
