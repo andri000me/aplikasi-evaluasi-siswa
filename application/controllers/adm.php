@@ -164,7 +164,7 @@ class Adm extends CI_Controller {
 		$jml_kd_per_soal = array();
 		foreach ($data_kd as $key) {
 			# code...
-			$jml_kd_per_soal[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0');
+			$jml_kd_per_soal[] = array('id_kd'=> $key['id_kd'],'kd_ke'=>$key['kd_ke'], 'jml_kd'=>'0');
 		}
 
 		// Ini variable hanya untuk percobaan saja yaa...
