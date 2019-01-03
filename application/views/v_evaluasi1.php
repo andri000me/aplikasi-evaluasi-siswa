@@ -202,7 +202,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
         	<tr>
             	<td align="center"><font size="+5"><?php echo $getData['jumlah_soal']; ?></font></td>
                 <td align="center"><font size="+5"><?php echo $stat1->jml_siswa; ?></font></td>
-                <td align="center"><font size="+5"><?php echo ($presen*100)."%"; ?></font></td>
+                <td align="center"><font size="+5"><?php echo number_format(($presen*100),0)."%"; ?></font></td>
             </tr>
         </table>
     

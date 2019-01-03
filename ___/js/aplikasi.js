@@ -743,7 +743,6 @@ function m_kelas_s() {
 	}).done(function(response) {
 		if (response.status == "ok") {
 			window.location.assign(base_url+"adm/m_kelas"); 
-			
 		} else {
 			console.log('gagal');
 		}
