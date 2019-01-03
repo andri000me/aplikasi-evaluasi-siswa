@@ -42,14 +42,15 @@ class Import extends CI_Controller {
             for ($j = $idx_baris_mulai; $j <= $idx_baris_selesai; $j++) {
                 $nim = $_sheet->getCell("A".$j)->getCalculatedValue();
                 $nama = $_sheet->getCell("B".$j)->getCalculatedValue();
-                $kelas = $_sheet->getCell("C".$j)->getCalculatedValue();
+                $jurusan = $_sheet->getCell("C".$j)->getCalculatedValue();
+                $kelas = $_sheet->getCell("D".$j)->getCalculatedValue();
 
                 if ($nim != "" || $nama != "") {
-                    $data[] = "('".$nim."', '".$nama."', '".$kelas."')"; 
+                    $data[] = "('".$nim."', '".$nama."', '".$jurusan."', '".$kelas."')"; 
                 }
             }
 
-            $strq = "INSERT INTO m_siswa (nim, nama, jurusan) VALUES ";
+            $strq = "INSERT INTO m_siswa (nim, nama, jurusan, id_kelas) VALUES ";
            
             $strq .= implode(",", $data).";";
             

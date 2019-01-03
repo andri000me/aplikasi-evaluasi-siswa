@@ -5,7 +5,7 @@
 	<link rel="shortcut icon" type="image/ico" href="<?php echo base_url(); ?>___/img/logotb.ico"/>
 <title>Evaluasi Kompetensi Dasar</title>
 <?php
-	
+		
 ?>
 <style type="text/css">
 
@@ -122,7 +122,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 <body>
 
 <div class="container">
-  <div class="header"><strong><font size="+3">Evaluasi Kompetensi Dasar</font></strong></div>
+  <div class="header"><strong><font size="+3">Evaluasi Kompetensi Dasar - Siswa</font></strong> </div>
   <div  class="sidebar1">
   	
     <table style="border:1px solid black;"  width="100%" cellspacing="0">
@@ -130,10 +130,24 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
         	<th style="border-bottom:2px solid black;" colspan="3"><strong>Kompetensi Dasar (KD):</strong></th>
         </tr>
         
-   	  <tr>
-        	<td valign="top" style="padding-right:5px" align="right" width="40"> 1</td>
-            <td valign="top" style="padding-left:5px">Kade (Jml KD) - (Jml Benar)</td>
+   	  <?php foreach($data_kd as $key){
+		  		$jml_kd = 0;
+				$jml_kd_benar = 0;
+		  		foreach($jml_kd_per_siswa as $no){
+					if($key['id_kd']==$no['id_kd']){
+						$jml_kd = $no['jml_kd'];
+						$jml_kd_benar = $no['jml_kd_benar'];
+						break 1;
+					}
+				}
+		  
+		  
+		 ?>
+    	<tr>
+        	<td valign="top" style="padding-right:5px" align="right" width="40"><?php echo $key['kd_ke'];?></td>
+            <td valign="top" style="padding-left:5px"><?php echo $key['nama']." - (Jml: "; echo $jml_kd.") (Benar: ".$jml_kd_benar.")";?></td>
         </tr>
+        <?php } ?>
         
     </table>
     
@@ -144,52 +158,82 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
       	<tr>
         	<td valign="top" width="150" style="text-align: left">Nama Siswa</td>
             <td valign="top" width="10" style="text-align: left">:</td>
-            <td valign="top" width="305" style="text-align: left"><strong>asdasdasdasda asdasd</strong></td>
+            <td valign="top" width="305" style="text-align: left"><strong><?php echo $data_ujian[0]['nama_siswa']; ?></strong></td>
+        </tr>
+        <tr>
+        	<td valign="top" width="150" style="text-align: left">NIS</td>
+            <td valign="top" width="10" style="text-align: left">:</td>
+            <td valign="top" width="305" style="text-align: left"><?php echo $data_ujian[0]['nim']; ?></td>
         </tr>
         <tr>
         	<td valign="top" width="150" style="text-align: left">Kelas</td>
             <td valign="top" width="10" style="text-align: left">:</td>
-            <td valign="top" width="305" style="text-align: left">sdasd asdasd asda</td>
+            <td valign="top" width="305" style="text-align: left"><?php echo $data_ujian[0]['nama_kelas']; ?></td>
         </tr>
         <tr>
         	<td valign="top" width="150" style="text-align: left">Mata Pelajaran</td>
             <td valign="top" width="10" style="text-align: left">:</td>
-            <td valign="top" width="305" style="text-align: left">asd asdada asdadads asdd</td>
+            <td valign="top" width="305" style="text-align: left"><?php echo $data_ujian[0]['nama_mapel']; ?></td>
         </tr>
         <tr><td valign="top" width="150" style="text-align: left">Nama Ujian</td>
             <td valign="top" width="10" style="text-align: left">:</td>
-            <td valign="top" width="305" style="text-align: left">dasd asdasd</td></tr>
+            <td valign="top" width="305" style="text-align: left"><?php echo $data_ujian[0]['nama_ujian']; ?></td></tr>
       </table>
   	</div>
     <div>
     	<table width="100%" border="1" cellspacing="0">
         	<tr>
-            	<td bgcolor="#CCFF00" align="center"><strong>Nilai</strong></td>
-              <td bgcolor="#CCFF00" align="center"><strong>Jawaban Benar</strong></td>
-              <td bgcolor="#CCFF00" align="center"><strong>Jawaban Salah</strong></td>
+            	<td bgcolor="#CCFF00" width="33.33" align="center"><strong>Nilai</strong></td>
+              <td bgcolor="#CCFF00" width="33.33" align="center"><strong>Jawaban Benar</strong></td>
+              <td bgcolor="#CCFF00" width="33.33" align="center"><strong>Jawaban Salah</strong></td>
             </tr>
         	<tr>
-            	<td align="center">&nbsp;</td>
-                <td align="center">&nbsp;</td>
-                <td align="center">&nbsp;</td>
+            	<td align="center"><font size="+5"><?php echo $data_ujian[0]['nilai']; ?></font></td>
+                <td align="center"><font size="+5"><?php echo $data_ujian[0]['jml_benar']; ?></font></td>
+                <td align="center"><font size="+5"><?php echo $jml_soal_salah; ?></font></td>
             </tr>
         
         	<tr>
             	<td bgcolor="#CCFF00" align="center"><strong>Jumlah Soal</strong></td>
-              <td bgcolor="#CCFF00" align="center"><strong>Jumlah Siswa</strong></td>
-              <td bgcolor="#CCFF00" align="center"><strong>?</strong></td>
+              <td bgcolor="#CCFF00" align="center"><strong>Jumlah Dijawab</strong></td>
+              <td bgcolor="#CCFF00" align="center"><strong>Jumlah Tidak Dijawab</strong></td>
             </tr>
         	<tr>
-            	<td align="center">&nbsp;</td>
-                <td align="center">&nbsp;</td>
-                <td align="center"><font size="+5">blm</font></td>
+            	<td align="center"><font size="+5"><?php echo $data_ujian[0]['jumlah_soal']; ?></font></td>
+                <td align="center"><font size="+5"><?php echo $jml_soal_dijawab; ?></font></td>
+                <td align="center"><font size="+5"><font size="+5"><?php echo $jml_soal_tidakdijawab;?></font></font></td>
             </tr>
         </table>
     
     </div> 
   </div>
   <div class="content">
-    <h3>Grafik Pencapaian KD</h3>
+    <h3>Data Jawaban Soal</h3>
+    <table border="1" cellpadding="2" cellspacing="0">
+    	<tr>
+        	<td bgcolor="#CCCCCC" align="center" width="44">No. Soal</td>
+            <td bgcolor="#CCCCCC" align="center" width="70">KD</td>
+            <td bgcolor="#CCCCCC" align="center" width="68">Pilihan</td>
+            <td bgcolor="#CCCCCC" align="center" width="260">Jawaban</td>
+        </tr>
+		<?php 
+				//for($i = 0 ; $i < count($tampung_soal) ; $i++){
+				foreach($tampung_soal as $key){
+					
+			?>
+        <tr>
+        	
+            <td align="center"><?php echo $key['nosoal'];?></td>
+            <td align="center"><?php echo $key['kd'];?></td>
+            <td align="center"><?php echo $key['pilihan'];?></td>
+            <td align="center"><?php echo $key['jawaban'];?></td>
+           
+        	
+        </tr> 
+		<?php	
+				
+			}?>
+    </table>
 			<?php
          
         	$dataPoints = array(
@@ -248,7 +292,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
         </script>
     
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    <script src="<?php echo base_url(); ?>___/js/canvasjs-2.2/canvasjs.min.js"></script>
+    <!-- <script src="<?php //echo base_url(); ?>___/js/canvasjs-2.2/canvasjs.min.js"></script>-->
                                   
     <!-- end .content --></div>
   <div class="footer">
