@@ -16,7 +16,7 @@ $uri4 = $this->uri->segment(4);
             <table class="table table-bordered" style="margin-bottom: 0px">
               <tr><td>Mata Kuliah</td><td><?php echo $detil_tes->namaMapel; ?></td></tr>
               <tr><td>Nama Guru</td><td><?php echo $detil_tes->nama_guru; ?></td></tr>
-              <tr><td width="30%">Nama Ujian</td><td width="70%"><?php echo $detil_tes->nama_ujian; ?></td></tr>
+              <tr><td width="30%">Nama Ujian</td><td width="70%"><?php echo $detil_tes->nama_ujian." - ".$detil_tes->nama_kelas; ?></td></tr>
               <tr><td>Waktu</td><td><?php echo $detil_tes->waktu; ?> menit</td></tr>
             </table>
         </div>

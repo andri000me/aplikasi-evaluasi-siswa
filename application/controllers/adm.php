@@ -1945,10 +1945,11 @@ class Adm extends CI_Controller {
 		
 		if ($uri3 == "det") {
 			$a['detil_tes'] = $this->db->query("SELECT m_mapel.nama AS namaMapel, m_guru.nama AS nama_guru, 
-												tr_guru_tes.* 
+												tr_guru_tes.*, kelas.nama_kelas as nama_kelas 
 												FROM tr_guru_tes 
 												INNER JOIN m_mapel ON tr_guru_tes.id_mapel = m_mapel.id
-												INNER JOIN m_guru ON tr_guru_tes.id_guru = m_guru.id
+												INNER JOIN m_guru ON tr_guru_tes.id_guru = m_guru.id 
+												INNER JOIN kelas ON tr_guru_tes.id_kelas=kelas.id_kelas
 												WHERE tr_guru_tes.id = '$uri4'")->row();
 			$a['statistik'] = $this->db->query("SELECT MAX(nilai) AS max_, MIN(nilai) AS min_, AVG(nilai) AS avg_ 
 											FROM tr_ikut_ujian
