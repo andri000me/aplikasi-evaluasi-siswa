@@ -169,18 +169,14 @@ class Adm extends CI_Controller {
 
 		// Ini variable hanya untuk percobaan saja yaa...
 		$jml_kd_per_siswa = array();
-		
+		foreach ($data_kd as $key) {
+			# code...
+			$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','point_kd' => '0');
+		}
 
 		$tampung_kd_siswa = array();
 
 		foreach ($siswa_kd as $key) {
-
-			foreach ($data_kd as $key) {
-			# code...
-				$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','point_kd' => '0');
-			}
-
-
 			$pc_jawaban = explode(",", $key['list_jawaban']);
 			$jml_soal = sizeof($pc_jawaban);
 
