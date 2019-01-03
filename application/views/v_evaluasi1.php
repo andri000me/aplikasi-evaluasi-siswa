@@ -15,7 +15,7 @@
         $dataPoints[] = array('label' => 'KD'.$key['id_kd'] , 'y'=>round($key['jml_kd'],0));
     }
     
-	print_r($arr);
+	
 	
 /*echo "<br><br><br>";
     echo count($jmlkd); echo "<br><pre>";
