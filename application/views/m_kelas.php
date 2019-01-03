@@ -40,8 +40,11 @@
       </div>
       <div class="modal-body">
           <form name="f_kelas" id="f_kelas" onsubmit="return m_kelas_s();">
-            <input type="text" required class="form-control" name="id_kelas" id="id_kelas" value="0">
               <table class="table table-form">
+                <tr>
+                  <td style="width: 25%">Kode Kelas</td>
+                  <td style="width: 75%"><input type="text" required class="form-control" name="id_kelas" id="id_kelas"></td>
+                </tr>
                 <tr><td style="width: 25%">Nama</td><td style="width: 75%"><input type="text" class="form-control" name="nama_kelas" id="nama_kelas" required></td></tr>
               </table>
       </div>

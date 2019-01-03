@@ -955,8 +955,8 @@ class Adm extends CI_Controller {
 	            $data_ok[1] = $d['id_kelas'];
 	            $data_ok[2] = $d['nama_kelas'];
 	            $data_ok[3] = '<div class="btn-group">
-                          <a href="#" onclick="return m_kelas_e('.$d['id_kelas'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
-                          <a href="#" onclick="return m_kelas_h('.$d['id_kelas'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
+                          <a href="#" onclick="return m_kelas_e(&apos;'.$d['id_kelas'].'&apos;);" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
+                          <a href="#" onclick="return m_kelas_h(&apos;'.$d['id_kelas'].'&apos;);" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
                          ';
 
 	            $data[] = $data_ok;
