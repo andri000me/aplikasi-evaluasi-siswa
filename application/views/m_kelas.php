@@ -12,7 +12,8 @@
         <thead>
           <tr>
             <th width="5%">No</th>
-            <th width="75%">Nama</th>
+            <th width="20%">Kode Kelas</th>
+            <th width="55%">Nama</th>
             <th width="20%">Aksi</th>
           </tr>
         </thead>
@@ -39,7 +40,7 @@
       </div>
       <div class="modal-body">
           <form name="f_kelas" id="f_kelas" onsubmit="return m_kelas_s();">
-            <input type="hidden" name="id_kelas" id="id_kelas" value="0">
+            <input type="text" required class="form-control" name="id_kelas" id="id_kelas" value="0">
               <table class="table table-form">
                 <tr><td style="width: 25%">Nama</td><td style="width: 75%"><input type="text" class="form-control" name="nama_kelas" id="nama_kelas" required></td></tr>
               </table>

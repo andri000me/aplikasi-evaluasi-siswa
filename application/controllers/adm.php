@@ -55,13 +55,92 @@ class Adm extends CI_Controller {
 		$uri3 = $this->uri->segment(3);
 		$uri4 = $this->uri->segment(4);
 		
-		$id_siswa = $this->input->post("id_siswa");
 
-		$data_ujian = $this->db->query("SELECT m_mapel.id, 	m_mapel.nama as nama_mapel, m_guru.nama as nama_guru, kelas.nama_kelas, tr_guru_tes.nama_ujian, tr_guru_tes.jumlah_soal as jumlah_soal FROM tr_guru_tes JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN m_guru on m_guru.id=tr_guru_tes.id_guru JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_guru_tes.id = '$id_ujian'")->result_array();
+		$id_siswa = $this->input->post("id_siswa");
+		$id_tes = $this->input->post("id_mapel2");
+		
+
+		$data_ujian = $this->db->query("SELECT m_mapel.id as id_mapel, m_siswa.nama as nama_siswa, m_siswa.nim as nim, kelas.nama_kelas as nama_kelas, m_mapel.nama as nama_mapel, tr_guru_tes.nama_ujian, tr_guru_tes.jumlah_soal as jumlah_soal, tr_ikut_ujian.jml_benar as jml_benar, tr_ikut_ujian.nilai as nilai, tr_ikut_ujian.list_soal, tr_ikut_ujian.list_jawaban FROM `tr_ikut_ujian` JOIN tr_guru_tes on tr_guru_tes.id=tr_ikut_ujian.id_tes JOIN m_siswa on m_siswa.id=tr_ikut_ujian.id_user JOIN m_mapel on m_mapel.id=tr_guru_tes.id_mapel JOIN kelas on kelas.id_kelas=tr_guru_tes.id_kelas WHERE tr_ikut_ujian.id_tes='".$id_tes."' AND tr_ikut_ujian.id_user='".$id_siswa."'")->result_array();
+
+		$data_kd = $this->db->query("SELECT * FROM kd WHERE id_mapel='".$data_ujian[0]['id_mapel']."'")->result_array();
+
+		$jml_kd_per_siswa = array();
+		
+		foreach ($data_kd as $key) {
+			# code...
+			$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','jml_kd_salah' => '0');
+		}
+
+		// Tampung soal untuk menampung soal dengan format
+		// No. Soal - KD - Pilihan - Jawaban
+		$tampung_soal = array();
+		$nosoal = 1;
+
+		$jml_soal_dijawab = 0;
+		$jml_soal_tidakdijawab = 0;
+		$jml_soal_salah = 0;
+
+			$pc_jawaban = explode(",",$data_ujian[0]['list_jawaban']);
+			$jml_soal = sizeof($pc_jawaban);
+
+			for ($s = 0;$s < $jml_soal;$s++){
+				$butir_soal = explode(":", $pc_jawaban[$s]);
+				$idsoal = $butir_soal[0];
+				$jawaban= $butir_soal[1];
+				$ragu = $butir_soal[2];
+				$kdsoal = $this->db->query("SELECT id_kd, jawaban FROM m_soal WHERE id='". $idsoal ."'")->row();
+
+					for ($ax = 0 ; $ax < count($jml_kd_per_siswa) ; $ax++) {
+						# code...
+						if($jml_kd_per_siswa[$ax]['id_kd']==$kdsoal->id_kd){
+							$ambil = $jml_kd_per_siswa[$ax]['jml_kd'];
+							$j = $ambil+1;	
+							$jml_kd_per_siswa[$ax]['jml_kd'] = $j;
+							
+							// CEK JAWABAN: KLO bener masukan kdalam tampung KD
+							if($jawaban==""){
+								$jml_soal_tidakdijawab = $jml_soal_tidakdijawab+1;
+								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'TIDAK DI ISI');
+							}else if($kdsoal->jawaban == $jawaban){
+								$ambil_benar = $jml_kd_per_siswa[$ax]['jml_kd_benar'];
+								$i = $ambil_benar+1;	
+								$jml_kd_per_siswa[$ax]['jml_kd_benar'] = $i;
+								
+								$jml_soal_dijawab++;
+
+								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'BENAR');
+							
+							}else{
+								$ambil_salah = $jml_kd_per_siswa[$ax]['jml_kd_salah'];
+								$i = $ambil_salah+1;	
+								$jml_kd_per_siswa[$ax]['jml_kd_salah'] = $i;
+
+								$jml_soal_dijawab++;
+								$jml_soal_salah++;
+
+								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'SALAH');
+							}
+
+							break 1;
+						}	
+					}			
+			}
+
+		$a['data_ujian']=$data_ujian;
+		$a['data_kd']=$data_kd;
+		$a['jml_kd_per_siswa']=$jml_kd_per_siswa;
+		$a['jml_soal_dijawab'] = $jml_soal_dijawab;
+		$a['jml_soal_tidakdijawab'] = $jml_soal_tidakdijawab;
+		$a['jml_soal_salah'] = $jml_soal_salah;
+		$a['tampung_soal'] = $tampung_soal;
+		
 
 		$this->load->view('v_evaluasi2',$a);
 	}
 
+
+
+	///////////////////// EVALUASI 1 --- Perujian / mapel/////////////////
 	public function evaluasi1(){
 		$this->cek_aktif();
 		cek_hakakses(array("admin","guru"), $this->session->userdata('admin_level'));
@@ -830,7 +909,7 @@ class Adm extends CI_Controller {
 				$ket = "edit";
 			} else {
 				$ket = "tambah";
-				$this->db->query("INSERT INTO kelas VALUES (null, '".bersih($p,"nama_kelas")."')");
+				$this->db->query("INSERT INTO kelas VALUES ('".bersih($p,"id_kelas")."', '".bersih($p,"nama_kelas")."')");
 			}
 			
 			$ret_arr['status'] 	= "ok";
@@ -860,8 +939,9 @@ class Adm extends CI_Controller {
 	        foreach ($q_datanya as $d) {
 	            $data_ok = array();
 	            $data_ok[0] = $no++;
-	            $data_ok[1] = $d['nama_kelas'];
-	            $data_ok[2] = '<div class="btn-group">
+	            $data_ok[1] = $d['id_kelas'];
+	            $data_ok[2] = $d['nama_kelas'];
+	            $data_ok[3] = '<div class="btn-group">
                           <a href="#" onclick="return m_kelas_e('.$d['id_kelas'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
                           <a href="#" onclick="return m_kelas_h('.$d['id_kelas'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
                          ';

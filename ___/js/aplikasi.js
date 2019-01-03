@@ -417,7 +417,7 @@ function pilih_namaujian(){
 		success: function(data) {
 						
 			for(var i=0; i < data.length;i++){
-				select.append($("<option value="+data[i].id_kd+">"+data[i].nama+"</option>"));
+				select.append($("<option value="+data[i].id+">"+data[i].nama+"</option>"));
 				
 			}
 				
