@@ -139,9 +139,23 @@ class Adm extends CI_Controller {
 	}
 
 
+function divideFloat($a, $b, $precision=3) {
+    $a*=pow(10, $precision);
+    $result=(int)($a / $b);
+    if (strlen($result)==$precision) return '0.' . $result;
+    else return preg_replace('/(\d{' . $precision . '})$/', '.\1', $result);
+}
+
+
 
 	///////////////////// EVALUASI 1 --- Perujian / mapel/////////////////
 	public function evaluasi1(){
+		function divideFloat($a, $b, $precision=3) {
+   	 		$a*=pow(10, $precision);
+    		$result=(int)($a / $b);
+    		if (strlen($result)==$precision) return '0.' . $result;
+    		else return preg_replace('/(\d{' . $precision . '})$/', '.\1', $result);
+		}
 		$this->cek_aktif();
 		cek_hakakses(array("admin","guru"), $this->session->userdata('admin_level'));
 
@@ -168,17 +182,22 @@ class Adm extends CI_Controller {
 		}
 
 		// Ini variable hanya untuk percobaan saja yaa...
-		$jml_kd_per_siswa = array();
-		foreach ($data_kd as $key) {
-			# code...
-			$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','point_kd' => '0');
-		}
+		
 
 		$tampung_kd_siswa = array();
 
 		foreach ($siswa_kd as $key) {
 			$pc_jawaban = explode(",", $key['list_jawaban']);
 			$jml_soal = sizeof($pc_jawaban);
+
+
+			$jml_kd_per_siswa = array();
+		foreach ($data_kd as $key) {
+			# code...
+			$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','point_kd' => '0');
+		}
+
+
 
 			for ($s = 0;$s < $jml_soal;$s++){
 				$butir_soal = explode(":", $pc_jawaban[$s]);
@@ -187,6 +206,10 @@ class Adm extends CI_Controller {
 				$kdsoal = $this->db->query("SELECT id_kd, jawaban FROM m_soal WHERE id='". $idsoal ."'")->row();
 
 				// CEK JAWABAN: KLO bener masukan kdalam tampung KD
+
+
+
+
 
 				//if($kdsoal->jawaban == $jawaban ){
 					// Kemudian cari dalam array sesuai dengan kode KD
@@ -203,14 +226,15 @@ class Adm extends CI_Controller {
 								$ambil_benar = $jml_kd_per_siswa[$ax]['jml_kd_benar'];
 								$i = $ambil_benar+1;	
 								$jml_kd_per_siswa[$ax]['jml_kd_benar'] = $i;
-								$jml_kd_per_siswa[$ax]['point_kd'] = $jml_kd_per_siswa[$ax]['jml_kd_benar'] / $jml_kd_per_siswa[$ax]['jml_kd'];
+								$ff = divideFloat($jml_kd_per_siswa[$ax]['jml_kd_benar'] ,$jml_kd_per_siswa[$ax]['jml_kd']);
+								 $jml_kd_per_siswa[$ax]['point_kd']= $ff;
 							}
 
 
 						}	
 					}
 				//}
-				
+				//$tampung_kd_siswa[] = $jml_kd_per_siswa;
 			}
 
 			$tampung_kd_siswa[] = $jml_kd_per_siswa;
@@ -225,7 +249,7 @@ class Adm extends CI_Controller {
 				for($aa = 0 ; $aa < count($jml_kd_per_soal);$aa++)
 				{
 					if($kd[$i]['id_kd'] == $jml_kd_per_soal[$aa]['id_kd']){
-						$jml_kd_per_soal[$aa]['jml_kd'] = $kd[$i]['point_kd'];
+						$jml_kd_per_soal[$aa]['jml_kd'] += $kd[$i]['point_kd'];
 						$jmlKdPoint=$jmlKdPoint+$kd[$i]['point_kd'];
 						break 1;
 					}
