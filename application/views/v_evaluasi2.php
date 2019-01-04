@@ -224,7 +224,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
         <tr>
         	
             <td align="center"><?php echo $key['nosoal'];?></td>
-            <td align="center"><?php echo $key['kd'];?></td>
+            <td align="center"><?php echo $key['kd_ke'];?></td>
             <td align="center"><?php echo $key['pilihan'];?></td>
             <td align="center"><?php echo $key['jawaban'];?></td>
            

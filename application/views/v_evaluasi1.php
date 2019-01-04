@@ -17,14 +17,14 @@
     
 	
 	
-echo "<br><br><br>";
-    echo count($jmlkd); 
-	echo "<br>kd-persoal<pre>";
-    print_r($jmlkd);
-   echo "<br><br>Per siswa<pre>";
-    print_r($jmlkdsiswa);echo "</pre>";
-    echo "</pre><br><br>Tampung<pre>";
-    print_r($tampung_kd_siswa);echo "</pre>";
+//echo "<br><br><br>";
+    //echo count($jmlkd); 
+	//echo "<br>kd-persoal<pre>";
+    //print_r($jmlkd);
+   //echo "<br><br>Per siswa<pre>";
+    //print_r($jmlkdsiswa);echo "</pre>";
+    //echo "</pre><br><br>Tampung<pre>";
+    //print_r($tampung_kd_siswa);echo "</pre>";
 	//print_r($arr);
 	//print_r($dataPoints);
 ?>

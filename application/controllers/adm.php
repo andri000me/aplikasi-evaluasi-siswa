@@ -88,7 +88,7 @@ class Adm extends CI_Controller {
 				$idsoal = $butir_soal[0];
 				$jawaban= $butir_soal[1];
 				$ragu = $butir_soal[2];
-				$kdsoal = $this->db->query("SELECT id_kd, jawaban FROM m_soal WHERE id='". $idsoal ."'")->row();
+				$kdsoal = $this->db->query("SELECT m_soal.id_kd as id_kd, kd.kd_ke, jawaban FROM m_soal JOIN kd on kd.id_kd=m_soal.id_kd WHERE id='". $idsoal ."'")->row();
 
 					for ($ax = 0 ; $ax < count($jml_kd_per_siswa) ; $ax++) {
 						# code...
@@ -100,7 +100,7 @@ class Adm extends CI_Controller {
 							// CEK JAWABAN: KLO bener masukan kdalam tampung KD
 							if($jawaban==""){
 								$jml_soal_tidakdijawab = $jml_soal_tidakdijawab+1;
-								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'TIDAK DI ISI');
+								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'TIDAK DI ISI', 'kd_ke'=>$kdsoal->kd_ke);
 							}else if($kdsoal->jawaban == $jawaban){
 								$ambil_benar = $jml_kd_per_siswa[$ax]['jml_kd_benar'];
 								$i = $ambil_benar+1;	
@@ -108,7 +108,7 @@ class Adm extends CI_Controller {
 								
 								$jml_soal_dijawab++;
 
-								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'BENAR');
+								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'BENAR', 'kd_ke'=>$kdsoal->kd_ke);
 							
 							}else{
 								$ambil_salah = $jml_kd_per_siswa[$ax]['jml_kd_salah'];
@@ -118,7 +118,7 @@ class Adm extends CI_Controller {
 								$jml_soal_dijawab++;
 								$jml_soal_salah++;
 
-								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'SALAH');
+								$tampung_soal[] = array('nosoal' => $nosoal++, 'kd'=> $kdsoal->id_kd, 'pilihan'=> $jawaban, 'jawaban'=> 'SALAH', 'kd_ke'=>$kdsoal->kd_ke);
 							}
 
 							break 1;
