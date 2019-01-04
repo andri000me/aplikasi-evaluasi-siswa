@@ -145,7 +145,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 		 ?>
     	<tr>
         	<td valign="top" style="padding-right:5px" align="right" width="40"><?php echo $key['kd_ke'];?></td>
-            <td valign="top" style="padding-left:5px"><?php echo $key['nama']." - (Jml: "; echo $jml_kd.") (Benar: ".$jml_kd_benar.")";?></td>
+            <td valign="top" style="padding-left:5px"><?php echo $key['nama']." - (<font color='blue'>Jml: "; echo $jml_kd."</font>) (<font color='blue'>Benar: <b>".$jml_kd_benar."</b></font>)";?></td>
         </tr>
         <?php } ?>
         
