@@ -718,11 +718,15 @@ function m_kd_h(id_kd) {
 //KELAS
 function m_kelas_e(id_kelas) {
 	$("#m_kelas").modal('show');
+	$("#id_obj").val('t');
+	if (id_kelas != 0){
+		$("#id_obj").val('e');
+	}
 	$.ajax({
 		type: "GET",
 		url: base_url+"adm/m_kelas/det/"+id_kelas,
 		success: function(data) {
-			$("#id_obj").val("e");
+			
 			$("#id_kelas").val(data.id_kelas);
 			$("#nama_kelas").val(data.nama_kelas);
 			$("#nama_kelas").focus();

@@ -35,7 +35,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 id="myModalLabel">Data Mata Pelajaran</h4>
+        <h4 id="myModalLabel">Data Kelas</h4>
       </div>
       <div class="modal-body">
           <form name="f_kelas" id="f_kelas" onsubmit="return m_kelas_s();">
