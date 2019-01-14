@@ -16,7 +16,7 @@ class Import extends CI_Controller {
 
 	public function siswa() {
         $idx_baris_mulai = 3;
-        $idx_baris_selesai = 100;
+        $idx_baris_selesai = 500;
 
         $target_file = './upload/temp/';
         $buat_folder_temp = !is_dir($target_file) ? @mkdir("./upload/temp/") : false;
