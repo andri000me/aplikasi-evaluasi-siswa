@@ -192,52 +192,60 @@ function divideFloat($a, $b, $precision=3) {
 
 
 			$jml_kd_per_siswa = array();
-		foreach ($data_kd as $key) {
-			# code...
-			$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','point_kd' => '0');
-		}
+			foreach ($data_kd as $key) {
+				# code...
+				$jml_kd_per_siswa[] = array('id_kd'=> $key['id_kd'], 'jml_kd'=>'0','jml_kd_benar'=>'0','point_kd' => '0', 'kd_ke'=>$key['kd_ke']);
+			}
 
 
 
 			for ($s = 0;$s < $jml_soal;$s++){
+				if($pc_jawaban[$s]!=""){
 				$butir_soal = explode(":", $pc_jawaban[$s]);
-				$idsoal = $butir_soal[0];
-				$jawaban= $butir_soal[1];
-				$kdsoal = $this->db->query("SELECT id_kd, jawaban FROM m_soal WHERE id='". $idsoal ."'")->row();
+					$idsoal = $butir_soal[0];
+					$jawaban= $butir_soal[1];
+					$kdsoal = $this->db->query("SELECT id_kd, jawaban FROM m_soal WHERE id='". $idsoal ."'")->row();
 
-				// CEK JAWABAN: KLO bener masukan kdalam tampung KD
-
-
+					// CEK JAWABAN: KLO bener masukan kdalam tampung KD
 
 
+					$cekrow = $this->db->query("SELECT id_kd FROM m_soal WHERE id='". $idsoal ."'")->num_rows();
+					if ($cekrow > 0){
+						ini_set("precision", 3);
+					
+					//if($kdsoal->jawaban == $jawaban ){
+						// Kemudian cari dalam array sesuai dengan kode KD
+						// Dan simpan ddalam Array jumlahnya
+						for ($ax = 0 ; $ax < count($jml_kd_per_siswa) ; $ax++) {
+							# code...
+							if($jml_kd_per_siswa[$ax]['id_kd']==$kdsoal->id_kd){
+								$ambil = $jml_kd_per_siswa[$ax]['jml_kd'];
+								$j = $ambil+1;	
+								$jml_kd_per_siswa[$ax]['jml_kd'] = $j;
+								
+								// CEK JAWABAN: KLO bener masukan kdalam tampung KD
+								if($kdsoal->jawaban == $jawaban ){
+									$ambil_benar = $jml_kd_per_siswa[$ax]['jml_kd_benar'];
+									$i = $ambil_benar+1;	
+									$jml_kd_per_siswa[$ax]['jml_kd_benar'] = $i;
+									//$ff = $jml_kd_per_siswa[$ax]['jml_kd_benar']/$jml_kd_per_siswa[$ax]['jml_kd'];
+									//$ff = divideFloat($jml_kd_per_siswa[$ax]['jml_kd_benar'] ,$jml_kd_per_siswa[$ax]['jml_kd']);
+									 //$jml_kd_per_siswa[$ax]['point_kd']= $ff;
+								}
 
-				//if($kdsoal->jawaban == $jawaban ){
-					// Kemudian cari dalam array sesuai dengan kode KD
-					// Dan simpan ddalam Array jumlahnya
-					for ($ax = 0 ; $ax < count($jml_kd_per_siswa) ; $ax++) {
-						# code...
-						if($jml_kd_per_siswa[$ax]['id_kd']==$kdsoal->id_kd){
-							$ambil = $jml_kd_per_siswa[$ax]['jml_kd'];
-							$j = $ambil+1;	
-							$jml_kd_per_siswa[$ax]['jml_kd'] = $j;
-							
-							// CEK JAWABAN: KLO bener masukan kdalam tampung KD
-							if($kdsoal->jawaban == $jawaban ){
-								$ambil_benar = $jml_kd_per_siswa[$ax]['jml_kd_benar'];
-								$i = $ambil_benar+1;	
-								$jml_kd_per_siswa[$ax]['jml_kd_benar'] = $i;
-								$ff = divideFloat($jml_kd_per_siswa[$ax]['jml_kd_benar'] ,$jml_kd_per_siswa[$ax]['jml_kd']);
-								 $jml_kd_per_siswa[$ax]['point_kd']= $ff;
+								$ff = $jml_kd_per_siswa[$ax]['jml_kd_benar']/$jml_kd_per_siswa[$ax]['jml_kd'];
+								$jml_kd_per_siswa[$ax]['point_kd']= $ff;
 							}
 
-
-						}	
+						}
 					}
-				//}
-				//$tampung_kd_siswa[] = $jml_kd_per_siswa;
+
+				}
+					//}
+					//$tampung_kd_siswa[] = $jml_kd_per_siswa;
 			}
 
-			$tampung_kd_siswa[] = $jml_kd_per_siswa;
+				$tampung_kd_siswa[] = $jml_kd_per_siswa;
 
 		}
 
@@ -284,6 +292,8 @@ function divideFloat($a, $b, $precision=3) {
 		$a['stat1'] = $stat1;
 
 		$a['presen'] = $presen;
+
+		$a['jmlKdPoint']=$jmlKdPoint;
 
 		$this->load->view('v_evaluasi1',$a);
 
@@ -2377,7 +2387,7 @@ function divideFloat($a, $b, $precision=3) {
 				$no = 1;
 				if (!empty($soal_urut_ok)) {
 				    foreach ($soal_urut_ok as $d) { 
-				        $tampil_media = tampil_media("./upload/gambar_soal/".$d->file, 'auto','auto');
+				        $tampil_media = tampil_media("./upload/gambar_soal/".$d->file, 'auto','auto', $no);
 				        $vrg = $arr_jawab[$d->id]["r"] == "" ? "N" : $arr_jawab[$d->id]["r"];
 
 				        $html .= '<input type="hidden" name="id_soal_'.$no.'" value="'.$d->id.'">';

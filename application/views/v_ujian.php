@@ -319,8 +319,18 @@
             $(".back").show();
         }
 
+        
+
         simpan_sementara();
         simpan();
+
+        stop_audio();
+    }
+
+    stop_audio = function(){
+        var x = $("#1");
+        x.pause();
+        alert('Naaahh');
     }
 
     back = function() {

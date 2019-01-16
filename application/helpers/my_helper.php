@@ -108,7 +108,7 @@ function obj_to_array($obj, $pilih) {
 }
 
 
-function tampil_media($file,$width="320px",$height="240px") {
+function tampil_media($file,$width="320px",$height="240px", $id) {
 	$ret = '';
 
 	$pc_file = explode(".", $file);
@@ -124,7 +124,7 @@ function tampil_media($file,$width="320px",$height="240px") {
 	} else {
 		if (in_array($eks, $eks_video)) {
 			if (is_file("./".$file)) {
-				$ret .= '<p><video width="'.$width.'" height="'.$height.'" controls>
+				$ret .= '<p><video width="'.$width.'" height="'.$height.'"  controls>
 				  <source src="'.base_url().$file.'" type="video/mp4">
 				  <source src="'.base_url().$file.'" type="application/octet-stream">Browser tidak support</video></p>';
 			} else {
@@ -134,7 +134,7 @@ function tampil_media($file,$width="320px",$height="240px") {
 
 		if (in_array($eks, $eks_audio)) {
 			if (is_file("./".$file)) {
-				$ret .= '<p><audio width="'.$width.'" height="'.$height.'" controls>
+				$ret .= '<p><audio width="'.$width.'" height="'.$height.'" id="'.$id.'" controls>
 				<source src="'.base_url().$file.'" type="audio/mpeg">
 				<source src="'.base_url().$file.'" type="audio/wav">Browser tidak support</audio></p>';
 			} else {

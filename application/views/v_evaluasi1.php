@@ -23,10 +23,35 @@
     //print_r($jmlkd);
    //echo "<br><br>Per siswa<pre>";
     //print_r($jmlkdsiswa);echo "</pre>";
+    //echo "JUMLAH KD POINT : ".$jmlKdPoint;
     //echo "</pre><br><br>Tampung<pre>";
     //print_r($tampung_kd_siswa);echo "</pre>";
 	//print_r($arr);
 	//print_r($dataPoints);
+    
+    /*$aaa = array('KD'=>'','point'=>0);
+    $no = 0;
+    $pointkdcek=0;
+    $jmlPoint = 0;
+    for ($a = 0 ; $a < count($tampung_kd_siswa) ; $a++){
+        for($b = 0 ; $b < count($tampung_kd_siswa[$a]); $b++){
+            
+            if ($tampung_kd_siswa[$a][$b]['id_kd']=='99'){
+                $pointkdcek = ($tampung_kd_siswa[$a][$b]['jml_kd_benar']/$tampung_kd_siswa[$a][$b]['jml_kd']);
+                echo $no." ".$tampung_kd_siswa[$a][$b]['jml_kd_benar']." == ".$tampung_kd_siswa[$a][$b]['jml_kd']." == ".$pointkdcek."<br>";
+            }
+            //echo "id_kd:".$tampung_kd_siswa[$a][$b]['id_kd']." - jml_kd:".$tampung_kd_siswa[$a][$b]['jml_kd']."- jml_kd_benar:".$tampung_kd_siswa[$a][$b]['jml_kd_benar']."||";
+            $jmlPoint += $tampung_kd_siswa[$a][$b]['point_kd'];
+
+        }
+        echo "<br>";
+        $no++;
+    }
+    $kk = 21;
+    $ll = 1;
+    $co = $ll/$kk;
+    echo $co."<br>";
+    echo "<br>".$pointkdcek;*/
 ?>
 <style type="text/css">
 
@@ -254,7 +279,11 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
                 
             },
 			 axisX:{
-   				labelAngle: 50,
+   				
+                labelMaxWidth: 100,
+                    labelAngle: 45,
+                    labelFontFamily:"verdana0",
+                inteval: 1,
  			},
             data: [{
                 type: "column",
